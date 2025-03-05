@@ -5,7 +5,7 @@ author: "Group 15"
 
 **WeatherXplore: Interactive Analytics for Smarter Living**
 
-### **1. Project Overview**
+### **1. Motivation of our Project**
 
 Weather plays a crucial role in various aspects of life, influencing agriculture, transportation, and public health. Understanding historical weather trends can provide valuable insights into climate patterns and extreme weather events. This project aims to develop a web-enabled visual analytics application using **Shiny** that allows users to explore and analyze historical weather data interactively.
 
