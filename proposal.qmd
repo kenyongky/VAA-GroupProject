@@ -1,0 +1,84 @@
+---
+title: "Project Proposal"
+author: "Group 15"
+---
+
+**WeatherXplore: Interactive Analytics for Smarter Living**
+
+### **1. Project Overview**
+
+Weather plays a crucial role in various aspects of life, influencing agriculture, transportation, and public health. Understanding historical weather trends can provide valuable insights into climate patterns and extreme weather events. This project aims to develop a web-enabled visual analytics application using **Shiny** that allows users to explore and analyze historical weather data interactively.
+
+Our primary goal is to **democratize access to weather analytics** by providing a user-friendly interface that integrates advanced data analytics and visualization techniques. The application will help users gain insights into temperature fluctuations, rainfall patterns, and extreme weather events in Singapore.
+
+### **2. Problem Statement**
+
+Climate change and unpredictable weather patterns pose challenges for various industries and communities. While meteorological agencies collect and store vast amounts of weather data, many stakeholders lack the tools to analyze and interpret these datasets effectively. Current publicly available weather dashboards often lack interactivity and deeper analytical capabilities.
+
+This project aims to address these issues by developing a **comprehensive visual analytics tool** that will allow users to interactively explore weather trends, compare historical data, and identify patterns that may indicate climate change effects.
+
+### **3. Related Work**
+
+Several existing solutions provide access to weather data, including **Meteorological Service Singapore’s (MSS) online reports** and various global weather APIs. However, most of these tools focus on data presentation rather than deep exploration and analysis. By leveraging R and Shiny, we aim to create a **more interactive and customizable experience**, enabling users to filter data, visualize trends dynamically, and gain actionable insights.
+
+### **4. Project Objectives**
+
+1.  **Develop a web-based interactive dashboard** that visualizes historical weather data from **Meteorological Service Singapore**.
+
+2.  **Implement interactive filtering and data exploration** functionalities, allowing users to analyze weather trends by time period, location, and weather type.
+
+3.  **Incorporate advanced data visualization techniques** (e.g., heatmaps, time series plots, and geospatial maps) to enhance data interpretation.
+
+4.  **Enable predictive analytics** by integrating machine learning models to estimate future weather trends.
+
+5.  **Ensure accessibility and usability**, making the tool suitable for researchers, policymakers, and the general public.
+
+### **5. Methodology**
+
+-   **Data Collection**: Obtain historical weather data from Visual Crossing: A leading provider of [weather data](https://www.visualcrossing.com/weather-data) and enterprise analysis tools to data scientists, business analysts, professionals, and academics.
+
+-   **Data Preprocessing**: Clean and preprocess the data, ensuring consistency in format and handling missing values.
+
+-   **Shiny Application Development**:
+
+    -   **Frontend**: Develop an interactive dashboard using **Shiny UI components**.
+
+    -   **Backend**: Implement data processing and visualization logic using **ggplot2, leaflet, and plotly**.
+
+    -   **Interactivity Features**: Include date filters, region selectors, and variable comparisons.
+
+-   **Deployment**: Host the application on **shinyapps.io**.
+
+### **6. Early Prototypes & Storyboards**
+
+The initial prototype includes:
+
+-   A **homepage** with an overview of key weather trends.
+
+-   A **dashboard with interactive charts** for temperature, precipitation, and humidity trends.
+
+-   A **map-based interface** for analyzing geospatial weather data.
+
+-   A **forecasting section** using time series models to predict future trends.
+
+### **7. Expected Outcomes**
+
+-   A fully functional **web-based visual analytics tool** that enables users to explore weather data interactively.
+
+-   Actionable insights into **climate trends** and their potential impact on Singapore.
+
+-   A user-friendly interface that encourages public engagement with weather analytics.
+
+### **8. Project Deliverables**
+
+-   **Shiny Application** hosted on **shinyapps.io**.
+
+-   **GitHub Repository** containing all source code, data processing scripts, and documentation.
+
+-   **User Guide** detailing how to navigate and utilize the analytics tool.
+
+-   **Project Poster** summarizing the project and its findings.
+
+-   **Minutes of Meeting** documenting project progress and team discussions.
+
+### 

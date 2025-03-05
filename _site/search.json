@@ -1,10 +1,10 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "VAA-GroupProject",
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "Project Proposal",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2"
+    "text": "WeatherXplore: Interactive Analytics for Smarter Living\n\n1. Project Overview\nWeather plays a crucial role in various aspects of life, influencing agriculture, transportation, and public health. Understanding historical weather trends can provide valuable insights into climate patterns and extreme weather events. This project aims to develop a web-enabled visual analytics application using Shiny that allows users to explore and analyze historical weather data interactively.\nOur primary goal is to democratize access to weather analytics by providing a user-friendly interface that integrates advanced data analytics and visualization techniques. The application will help users gain insights into temperature fluctuations, rainfall patterns, and extreme weather events in Singapore.\n\n\n2. Problem Statement\nClimate change and unpredictable weather patterns pose challenges for various industries and communities. While meteorological agencies collect and store vast amounts of weather data, many stakeholders lack the tools to analyze and interpret these datasets effectively. Current publicly available weather dashboards often lack interactivity and deeper analytical capabilities.\nThis project aims to address these issues by developing a comprehensive visual analytics tool that will allow users to interactively explore weather trends, compare historical data, and identify patterns that may indicate climate change effects.\n\n\n3. Related Work\nSeveral existing solutions provide access to weather data, including Meteorological Service Singapore’s (MSS) online reports and various global weather APIs. However, most of these tools focus on data presentation rather than deep exploration and analysis. By leveraging R and Shiny, we aim to create a more interactive and customizable experience, enabling users to filter data, visualize trends dynamically, and gain actionable insights.\n\n\n4. Project Objectives\n\nDevelop a web-based interactive dashboard that visualizes historical weather data from Meteorological Service Singapore.\nImplement interactive filtering and data exploration functionalities, allowing users to analyze weather trends by time period, location, and weather type.\nIncorporate advanced data visualization techniques (e.g., heatmaps, time series plots, and geospatial maps) to enhance data interpretation.\nEnable predictive analytics by integrating machine learning models to estimate future weather trends.\nEnsure accessibility and usability, making the tool suitable for researchers, policymakers, and the general public.\n\n\n\n5. Methodology\n\nData Collection: Obtain historical weather data from Visual Crossing: A leading provider of weather data and enterprise analysis tools to data scientists, business analysts, professionals, and academics.\nData Preprocessing: Clean and preprocess the data, ensuring consistency in format and handling missing values.\nShiny Application Development:\n\nFrontend: Develop an interactive dashboard using Shiny UI components.\nBackend: Implement data processing and visualization logic using ggplot2, leaflet, and plotly.\nInteractivity Features: Include date filters, region selectors, and variable comparisons.\n\nDeployment: Host the application on shinyapps.io.\n\n\n\n6. Early Prototypes & Storyboards\nThe initial prototype includes:\n\nA homepage with an overview of key weather trends.\nA dashboard with interactive charts for temperature, precipitation, and humidity trends.\nA map-based interface for analyzing geospatial weather data.\nA forecasting section using time series models to predict future trends.\n\n\n\n7. Expected Outcomes\n\nA fully functional web-based visual analytics tool that enables users to explore weather data interactively.\nActionable insights into climate trends and their potential impact on Singapore.\nA user-friendly interface that encourages public engagement with weather analytics.\n\n\n\n8. Project Deliverables\n\nShiny Application hosted on shinyapps.io.\nGitHub Repository containing all source code, data processing scripts, and documentation.\nUser Guide detailing how to navigate and utilize the analytics tool.\nProject Poster summarizing the project and its findings.\nMinutes of Meeting documenting project progress and team discussions."
   },
   {
     "objectID": "about.html",
@@ -12,5 +12,12 @@
     "title": "About",
     "section": "",
     "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "VAA-GroupProject",
+    "section": "",
+    "text": "WeatherXplore: Interactive Analytics for Smarter Living"
   }
 ]
