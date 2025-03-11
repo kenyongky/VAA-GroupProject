@@ -8,7 +8,7 @@
 
 <meta name="author" content="Group 15">
 
-<title>Project Proposal – VAA-GroupProject</title>
+<title>Project Proposal – WeatherXplore</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">VAA-GroupProject</span>
+    <span class="navbar-title">WeatherXplore</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -117,15 +117,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#motivation-of-our-project" id="toc-motivation-of-our-project" class="nav-link active" data-scroll-target="#motivation-of-our-project"><strong>1. Motivation of our Project</strong></a></li>
-  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link" data-scroll-target="#problem-statement"><strong>2. Problem Statement</strong></a></li>
-  <li><a href="#related-work" id="toc-related-work" class="nav-link" data-scroll-target="#related-work"><strong>3. Related Work</strong></a></li>
-  <li><a href="#project-objectives" id="toc-project-objectives" class="nav-link" data-scroll-target="#project-objectives"><strong>4. Project Objectives</strong></a></li>
-  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology"><strong>5. Methodology</strong></a></li>
-  <li><a href="#early-prototypes-storyboards" id="toc-early-prototypes-storyboards" class="nav-link" data-scroll-target="#early-prototypes-storyboards"><strong>6. Early Prototypes &amp; Storyboards</strong></a></li>
-  <li><a href="#expected-outcomes" id="toc-expected-outcomes" class="nav-link" data-scroll-target="#expected-outcomes"><strong>7. Expected Outcomes</strong></a></li>
-  <li><a href="#project-deliverables" id="toc-project-deliverables" class="nav-link" data-scroll-target="#project-deliverables"><strong>8. Project Deliverables</strong></a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">1. Project Overview</a></li>
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link" data-scroll-target="#problem-statement">2. Problem Statement</a></li>
+  <li><a href="#related-work" id="toc-related-work" class="nav-link" data-scroll-target="#related-work">3. Related Work</a></li>
+  <li><a href="#project-objectives" id="toc-project-objectives" class="nav-link" data-scroll-target="#project-objectives">4. Project Objectives</a></li>
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">5. Methodology</a></li>
+  <li><a href="#key-features-functionality" id="toc-key-features-functionality" class="nav-link" data-scroll-target="#key-features-functionality">6. Key Features &amp; Functionality</a></li>
+  <li><a href="#early-prototype" id="toc-early-prototype" class="nav-link" data-scroll-target="#early-prototype">7. Early Prototype</a></li>
+  <li><a href="#project-timeline" id="toc-project-timeline" class="nav-link" data-scroll-target="#project-timeline">8. Project Timeline</a></li>
   </ul>
 </nav>
     </div>
@@ -158,74 +157,90 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><strong>WeatherXplore: Interactive Analytics for Smarter Living</strong></p>
-<section id="motivation-of-our-project" class="level3">
-<h3 class="anchored" data-anchor-id="motivation-of-our-project"><strong>1. Motivation of our Project</strong></h3>
-<p>Weather plays a crucial role in various aspects of life, influencing agriculture, transportation, and public health. Understanding historical weather trends can provide valuable insights into climate patterns and extreme weather events. This project aims to develop a web-enabled visual analytics application using <strong>Shiny</strong> that allows users to explore and analyze historical weather data interactively.</p>
-<p>Our primary goal is to <strong>democratize access to weather analytics</strong> by providing a user-friendly interface that integrates advanced data analytics and visualization techniques. The application will help users gain insights into temperature fluctuations, rainfall patterns, and extreme weather events in Singapore.</p>
+<section id="project-overview" class="level1">
+<h1>1. Project Overview</h1>
+<p>Weather significantly impacts daily life, influencing outdoor activities, travel, public safety, and health. Understanding historical weather trends and real-time data can provide valuable insights for better decision-making. This project aims to develop a <strong>web-enabled interactive analytics platform</strong> using <strong>Shiny</strong> that enables users to explore and analyze weather data in Singapore.</p>
+<p>Our goal is to democratize access to weather analytics by integrating advanced data visualization and predictive modeling techniques into a user-friendly interface. The application will assist users in optimizing their daily activities, selecting appropriate clothing, and planning outdoor events based on weather patterns. Additionally, it will provide insights into climate trends and extreme weather events, benefiting policymakers, researchers, and the general public.</p>
 </section>
-<section id="problem-statement" class="level3">
-<h3 class="anchored" data-anchor-id="problem-statement"><strong>2. Problem Statement</strong></h3>
-<p>Climate change and unpredictable weather patterns pose challenges for various industries and communities. While meteorological agencies collect and store vast amounts of weather data, many stakeholders lack the tools to analyze and interpret these datasets effectively. Current publicly available weather dashboards often lack interactivity and deeper analytical capabilities.</p>
-<p>This project aims to address these issues by developing a <strong>comprehensive visual analytics tool</strong> that will allow users to interactively explore weather trends, compare historical data, and identify patterns that may indicate climate change effects.</p>
+<section id="problem-statement" class="level1">
+<h1>2. Problem Statement</h1>
+<p>Despite the availability of weather forecasts, many individuals and industries lack customized, data-driven insights that help them plan effectively. The challenges include:</p>
+<ul>
+<li><p><strong>Uncertainty in Outdoor Planning</strong>: Users struggle with unpredictable rainfall, high UV levels, and fluctuating temperatures when scheduling activities.</p></li>
+<li><p><strong>Health Risks from Weather Exposure</strong>: Extreme temperatures and UV levels pose risks such as heatstroke, dehydration, and skin damage.</p></li>
+<li><p><strong>Lack of Data-Driven Travel &amp; Activity Recommendations</strong>: Current weather apps provide forecasts but do not offer <strong>historical trend analysis</strong> to guide travel and event planning.</p></li>
+<li><p><strong>Limited Awareness of Severe Weather Conditions</strong>: There is a need for real-time alerts on extreme weather events to enhance preparedness and safety.</p></li>
+</ul>
 </section>
-<section id="related-work" class="level3">
-<h3 class="anchored" data-anchor-id="related-work"><strong>3. Related Work</strong></h3>
-<p>Several existing solutions provide access to weather data, including <strong>Meteorological Service Singapore’s (MSS) online reports</strong> and various global weather APIs. However, most of these tools focus on data presentation rather than deep exploration and analysis. By leveraging R and Shiny, we aim to create a <strong>more interactive and customizable experience</strong>, enabling users to filter data, visualize trends dynamically, and gain actionable insights.</p>
+<section id="related-work" class="level1">
+<h1>3. Related Work</h1>
+<p>Several existing weather applications, including <strong>Google Weather, Apple Weather, and AccuWeather</strong>, provide real-time forecasts but lack interactive historical trend analysis and personalized recommendations. The <strong>Meteorological Service Singapore (MSS)</strong> offers online reports, but these are often static and do not allow dynamic data exploration.</p>
+<p>Our project enhances existing functionalities by integrating <strong>interactive dashboards, predictive analytics, and real-time safety alerts</strong>, providing users with actionable weather insights tailored to their needs.</p>
 </section>
-<section id="project-objectives" class="level3">
-<h3 class="anchored" data-anchor-id="project-objectives"><strong>4. Project Objectives</strong></h3>
+<section id="project-objectives" class="level1">
+<h1>4. Project Objectives</h1>
 <ol type="1">
-<li><p><strong>Develop a web-based interactive dashboard</strong> that visualizes historical weather data from <strong>Meteorological Service Singapore</strong>.</p></li>
-<li><p><strong>Implement interactive filtering and data exploration</strong> functionalities, allowing users to analyze weather trends by time period, location, and weather type.</p></li>
-<li><p><strong>Incorporate advanced data visualization techniques</strong> (e.g., heatmaps, time series plots, and geospatial maps) to enhance data interpretation.</p></li>
-<li><p><strong>Enable predictive analytics</strong> by integrating machine learning models to estimate future weather trends.</p></li>
-<li><p><strong>Ensure accessibility and usability</strong>, making the tool suitable for researchers, policymakers, and the general public.</p></li>
+<li><p><strong>Develop an interactive web-based dashboard</strong> that visualizes historical and real-time weather data from <strong>Meteorological Service Singapore</strong>.</p></li>
+<li><p><strong>Provide weather-aware activity and travel recommendations</strong>, helping users plan events and outdoor activities based on temperature, UV index, humidity, and precipitation trends.</p></li>
+<li><p><strong>Incorporate safety advisories</strong>, including UV exposure warnings, clothing recommendations, and severe weather alerts.</p></li>
+<li><p><strong>Enable interactive filtering and data exploration</strong>, allowing users to analyze weather patterns by time period, location, and variable type.</p></li>
+<li><p><strong>Implement predictive analytics</strong>, utilizing machine learning models to estimate future weather trends and patterns.</p></li>
+<li><p><strong>Ensure accessibility and usability</strong>, making the tool suitable for both the general public and specialized users like policymakers and researchers.</p></li>
 </ol>
 </section>
-<section id="methodology" class="level3">
-<h3 class="anchored" data-anchor-id="methodology"><strong>5. Methodology</strong></h3>
+<section id="methodology" class="level1">
+<h1>5. Methodology</h1>
+<p><strong>Data Collection</strong>: Obtain historical weather data from <strong>Visual Crossing</strong> and real-time updates from meteorological sources.</p>
+<p><strong>Data Preprocessing</strong>: Clean and standardize data, handling missing values and ensuring consistency.</p>
+<p><strong>Shiny Application Development</strong>:</p>
 <ul>
-<li><p><strong>Data Collection</strong>: Obtain historical weather data from Visual Crossing: A leading provider of&nbsp;<a href="https://www.visualcrossing.com/weather-data">weather data</a> and enterprise analysis tools to data scientists, business analysts, professionals, and academics.</p></li>
-<li><p><strong>Data Preprocessing</strong>: Clean and preprocess the data, ensuring consistency in format and handling missing values.</p></li>
-<li><p><strong>Shiny Application Development</strong>:</p>
-<ul>
-<li><p><strong>Frontend</strong>: Develop an interactive dashboard using <strong>Shiny UI components</strong>.</p></li>
-<li><p><strong>Backend</strong>: Implement data processing and visualization logic using <strong>ggplot2, leaflet, and plotly</strong>.</p></li>
+<li><p><strong>Frontend</strong>: Design an interactive dashboard using <strong>Shiny UI components</strong>.</p></li>
+<li><p><strong>Backend</strong>: Implement data processing and visualization using <strong>ggplot2, leaflet, and plotly</strong>.</p></li>
 <li><p><strong>Interactivity Features</strong>: Include date filters, region selectors, and variable comparisons.</p></li>
-</ul></li>
-<li><p><strong>Deployment</strong>: Host the application on <strong>shinyapps.io</strong>.</p></li>
+<li><p><strong>Deployment</strong>: Host the application on <strong>shinyapps.io</strong> for easy public access.</p></li>
 </ul>
 </section>
-<section id="early-prototypes-storyboards" class="level3">
-<h3 class="anchored" data-anchor-id="early-prototypes-storyboards"><strong>6. Early Prototypes &amp; Storyboards</strong></h3>
-<p>The initial prototype includes:</p>
+<section id="key-features-functionality" class="level1">
+<h1>6. Key Features &amp; Functionality</h1>
+<section id="weather-aware-activity-travel-planner" class="level4">
+<h4 class="anchored" data-anchor-id="weather-aware-activity-travel-planner"><strong>6.1 Weather-Aware Activity &amp; Travel Planner</strong></h4>
 <ul>
-<li><p>A <strong>homepage</strong> with an overview of key weather trends.</p></li>
+<li><p>Identifies optimal time slots for outdoor activities based on temperature, humidity, UV index, and precipitation trends.</p></li>
+<li><p>Visual heatmaps and trend graphs to display the best times for outdoor events.</p></li>
+<li><p>Rainfall trend analysis through line charts and bar graphs to highlight seasonal variations.</p></li>
+<li><p>Interactive travel and event advisory system integrating both historical data and real-time forecasts.</p></li>
+</ul>
+</section>
+<section id="uv-index-skin-safety-advisory" class="level4">
+<h4 class="anchored" data-anchor-id="uv-index-skin-safety-advisory"><strong>6.2 UV Index &amp; Skin Safety Advisory</strong></h4>
+<ul>
+<li><p>Monitors UV index levels throughout the day.</p></li>
+<li><p>Provides real-time sunscreen and clothing recommendations to minimize skin damage.</p></li>
+<li><p>Displays UV index heatmaps and safety alerts.</p></li>
+</ul>
+</section>
+<section id="predictive-analytics-climate-trend-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="predictive-analytics-climate-trend-analysis"><strong>6.3 Predictive Analytics &amp; Climate Trend Analysis</strong></h4>
+<ul>
+<li><p>Implements <strong>time series forecasting</strong> models to predict future weather trends.</p></li>
+<li><p>Analyzes long-term climate trends and their potential impacts on Singapore.</p></li>
+<li><p>Provides insights into climate change indicators using interactive visualizations.</p></li>
+</ul>
+</section>
+</section>
+<section id="early-prototype" class="level1">
+<h1>7. Early Prototype</h1>
+<p>The initial prototype will include:</p>
+<ol type="1">
+<li><p>A <strong>homepage</strong> with key weather trends and insights.</p></li>
 <li><p>A <strong>dashboard with interactive charts</strong> for temperature, precipitation, and humidity trends.</p></li>
-<li><p>A <strong>map-based interface</strong> for analyzing geospatial weather data.</p></li>
-<li><p>A <strong>forecasting section</strong> using time series models to predict future trends.</p></li>
-</ul>
+<li><p>A <strong>map-based interface</strong> for geospatial weather analysis.</p></li>
+<li><p>A <strong>forecasting section</strong> utilizing predictive models to estimate future trends.</p></li>
+</ol>
 </section>
-<section id="expected-outcomes" class="level3">
-<h3 class="anchored" data-anchor-id="expected-outcomes"><strong>7. Expected Outcomes</strong></h3>
-<ul>
-<li><p>A fully functional <strong>web-based visual analytics tool</strong> that enables users to explore weather data interactively.</p></li>
-<li><p>Actionable insights into <strong>climate trends</strong> and their potential impact on Singapore.</p></li>
-<li><p>A user-friendly interface that encourages public engagement with weather analytics.</p></li>
-</ul>
-</section>
-<section id="project-deliverables" class="level3">
-<h3 class="anchored" data-anchor-id="project-deliverables"><strong>8. Project Deliverables</strong></h3>
-<ul>
-<li><p><strong>Shiny Application</strong> hosted on <strong>shinyapps.io</strong>.</p></li>
-<li><p><strong>GitHub Repository</strong> containing all source code, data processing scripts, and documentation.</p></li>
-<li><p><strong>User Guide</strong> detailing how to navigate and utilize the analytics tool.</p></li>
-<li><p><strong>Project Poster</strong> summarizing the project and its findings.</p></li>
-<li><p><strong>Minutes of Meeting</strong> documenting project progress and team discussions.</p></li>
-</ul>
-</section>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section"></h3>
+<section id="project-timeline" class="level1">
+<h1>8. Project Timeline</h1>
+<p><img src="images/Screenshot 2025-03-11 234224.png" class="img-fluid"></p>
 
 
 </section>
