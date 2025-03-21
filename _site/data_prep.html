@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Kenneth Yong">
 
-<title>WeatherXplore</title>
+<title>Data Preparation – WeatherXplore</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -89,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -133,21 +168,40 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#download-historical-weather-data" id="toc-download-historical-weather-data" class="nav-link" data-scroll-target="#download-historical-weather-data">1. Download Historical Weather Data</a></li>
+  <li><a href="#combine-all-csv-files-into-one-dataset" id="toc-combine-all-csv-files-into-one-dataset" class="nav-link" data-scroll-target="#combine-all-csv-files-into-one-dataset">2. Combine All CSV Files into One Dataset</a></li>
+  <li><a href="#convert-year-month-day-to-a-single-date-column" id="toc-convert-year-month-day-to-a-single-date-column" class="nav-link" data-scroll-target="#convert-year-month-day-to-a-single-date-column">3. Convert Year, Month, Day to a Single Date Column</a></li>
+  <li><a href="#add-region-column" id="toc-add-region-column" class="nav-link" data-scroll-target="#add-region-column">4. Add Region Column</a></li>
+  <li><a href="#add-latitude-and-longitude" id="toc-add-latitude-and-longitude" class="nav-link" data-scroll-target="#add-latitude-and-longitude">5. Add Latitude and Longitude</a></li>
+  <li><a href="#sort-data" id="toc-sort-data" class="nav-link" data-scroll-target="#sort-data">6. Sort Data</a></li>
+  <li><a href="#check-for-duplicates-and-missing-values" id="toc-check-for-duplicates-and-missing-values" class="nav-link" data-scroll-target="#check-for-duplicates-and-missing-values">7. Check for Duplicates and Missing Values</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">WeatherXplore</h1>
+<h1 class="title">Data Preparation</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Kenneth Yong </p>
+          </div>
+  </div>
     
   
     
@@ -158,10 +212,124 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><strong>Welcome to WeatherXplore! An interactive analytics platform for smarter living.</strong></p>
-<p><img src="images/weather-forecasting-multi-color-concept-icon-analysis-of-atmospheric-data-and-models-application-of-meteorology-round-shape-line-illustration-abstract-idea-graphic-design-easy-to-use-in-article-vector-01.jpg" class="img-fluid"></p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This document describes the data preparation process for combining and enriching historical weather data for Singapore from 2020 to 2024.</p>
+</section>
+<section id="download-historical-weather-data" class="level2">
+<h2 class="anchored" data-anchor-id="download-historical-weather-data">1. Download Historical Weather Data</h2>
+<p>Download the daily weather data for each year from the <a href="https://www.weather.gov.sg/climate-historical-daily/">Meteorological Service Singapore</a> website. Save all the CSV files into a single folder.</p>
+</section>
+<section id="combine-all-csv-files-into-one-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="combine-all-csv-files-into-one-dataset">2. Combine All CSV Files into One Dataset</h2>
+<p>We used the <code>data.table</code> package to read and combine multiple CSV files stored in one directory.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>file_list <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.csv$"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Read and combine all CSVs</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>weather_data <span class="ot">&lt;-</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(file_list, fread), <span class="at">fill =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="convert-year-month-day-to-a-single-date-column" class="level2">
+<h2 class="anchored" data-anchor-id="convert-year-month-day-to-a-single-date-column">3. Convert Year, Month, Day to a Single Date Column</h2>
+<p>Assuming each CSV file includes columns for <code>Year</code>, <code>Month</code>, and <code>Day</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine year, month, and day into a proper date</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>weather_data[, Date <span class="sc">:</span><span class="er">=</span> <span class="fu">as.Date</span>(<span class="fu">paste</span>(Year, Month, Day, <span class="at">sep =</span> <span class="st">"-"</span>))]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove the original columns</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>weather_data[, <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span>) <span class="sc">:</span><span class="er">=</span> <span class="cn">NULL</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="add-region-column" class="level2">
+<h2 class="anchored" data-anchor-id="add-region-column">4. Add Region Column</h2>
+<p>We map the region using a predefined vector based on the station name.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>region_map <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Admiralty"</span> <span class="ot">=</span> <span class="st">"North"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Ang Mo Kio"</span> <span class="ot">=</span> <span class="st">"Northeast"</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Changi"</span> <span class="ot">=</span> <span class="st">"East"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Choa Chu Kang (South)"</span> <span class="ot">=</span> <span class="st">"West"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Clementi"</span> <span class="ot">=</span> <span class="st">"West"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"East Coast Parkway"</span> <span class="ot">=</span> <span class="st">"East"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Jurong (West)"</span> <span class="ot">=</span> <span class="st">"West"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Jurong Island"</span> <span class="ot">=</span> <span class="st">"West"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Marina Barrage"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Newton"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pasir Panjang"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Paya Lebar"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pulau Ubin"</span> <span class="ot">=</span> <span class="st">"Northeast"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Seletar"</span> <span class="ot">=</span> <span class="st">"North"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sembawang"</span> <span class="ot">=</span> <span class="st">"North"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sentosa Island"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tai Seng"</span> <span class="ot">=</span> <span class="st">"Northeast"</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tengah"</span> <span class="ot">=</span> <span class="st">"West"</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tuas South"</span> <span class="ot">=</span> <span class="st">"West"</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>weather_data[, Region <span class="sc">:</span><span class="er">=</span> region_map[Station]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="add-latitude-and-longitude" class="level2">
+<h2 class="anchored" data-anchor-id="add-latitude-and-longitude">5. Add Latitude and Longitude</h2>
+<p>We join latitude and longitude coordinates using a <a href="https://www.weather.gov.sg/wp-content/uploads/2024/08/Station_Records.pdf">reference table</a>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_coords <span class="ot">&lt;-</span> <span class="fu">data.table</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Station =</span> <span class="fu">c</span>(<span class="st">"Admiralty"</span>, <span class="st">"Ang Mo Kio"</span>, <span class="st">"Changi"</span>, <span class="st">"Choa Chu Kang (South)"</span>, <span class="st">"Clementi"</span>, <span class="st">"East Coast Parkway"</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Jurong (West)"</span>, <span class="st">"Jurong Island"</span>, <span class="st">"Marina Barrage"</span>, <span class="st">"Newton"</span>, <span class="st">"Pasir Panjang"</span>, <span class="st">"Paya Lebar"</span>, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Pulau Ubin"</span>, <span class="st">"Seletar"</span>, <span class="st">"Sembawang"</span>, <span class="st">"Sentosa Island"</span>, <span class="st">"Tai Seng"</span>, <span class="st">"Tengah"</span>, <span class="st">"Tuas South"</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Latitude =</span> <span class="fu">c</span>(<span class="fl">1.4439</span>, <span class="fl">1.3793</span>, <span class="fl">1.3678</span>, <span class="fl">1.3729</span>, <span class="fl">1.3318</span>, <span class="fl">1.3133</span>, <span class="fl">1.3458</span>, <span class="fl">1.2542</span>, <span class="fl">1.2799</span>, <span class="fl">1.3106</span>, <span class="fl">1.2824</span>, </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>               <span class="fl">1.3571</span>, <span class="fl">1.4168</span>, <span class="fl">1.4167</span>, <span class="fl">1.4250</span>, <span class="fl">1.2503</span>, <span class="fl">1.3406</span>, <span class="fl">1.3858</span>, <span class="fl">1.2938</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Longitude =</span> <span class="fu">c</span>(<span class="fl">103.7854</span>, <span class="fl">103.8500</span>, <span class="fl">103.9823</span>, <span class="fl">103.7224</span>, <span class="fl">103.7762</span>, <span class="fl">103.9620</span>, <span class="fl">103.6817</span>, <span class="fl">103.6741</span>, <span class="fl">103.8703</span>, </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                <span class="fl">103.8365</span>, <span class="fl">103.7545</span>, <span class="fl">103.9037</span>, <span class="fl">103.9673</span>, <span class="fl">103.8650</span>, <span class="fl">103.8200</span>, <span class="fl">103.8275</span>, <span class="fl">103.8882</span>, <span class="fl">103.7119</span>, </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                <span class="fl">103.6184</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>weather_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(weather_data, data_coords, <span class="at">by =</span> <span class="st">"Station"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sort-data" class="level2">
+<h2 class="anchored" data-anchor-id="sort-data">6. Sort Data</h2>
+<p>Group by station alphabetically and sort dates chronologically within each station.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort data</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setorder</span>(weather_data, Station, Date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="check-for-duplicates-and-missing-values" class="level2">
+<h2 class="anchored" data-anchor-id="check-for-duplicates-and-missing-values">7. Check for Duplicates and Missing Values</h2>
+<p>Ensure data integrity by checking for duplicates and missing values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, naniar)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>weather_data <span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"data/weather_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 34124 Columns: 14
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (12): Region, Station, Date, Daily Rainfall Total (mm), Highest 30 min R...
+dbl  (2): Latitude, Longitude
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> weather_data <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">duplicated</span>(.))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(duplicates)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 14
+# ℹ 14 variables: Region &lt;chr&gt;, Station &lt;chr&gt;, Date &lt;chr&gt;,
+#   Daily Rainfall Total (mm) &lt;chr&gt;, Highest 30 min Rainfall (mm) &lt;chr&gt;,
+#   Highest 60 min Rainfall (mm) &lt;chr&gt;, Highest 120 min Rainfall (mm) &lt;chr&gt;,
+#   Mean Temperature (°C) &lt;chr&gt;, Maximum Temperature (°C) &lt;chr&gt;,
+#   Minimum Temperature (°C) &lt;chr&gt;, Mean Wind Speed (km/h) &lt;chr&gt;,
+#   Max Wind Speed (km/h) &lt;chr&gt;, Latitude &lt;dbl&gt;, Longitude &lt;dbl&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(weather_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_prep_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

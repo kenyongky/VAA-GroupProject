@@ -1,0 +1,113 @@
+---
+title: "Data Preparation"
+author: "Kenneth Yong"
+---
+
+## Overview
+
+This document describes the data preparation process for combining and enriching historical weather data for Singapore from 2020 to 2024.
+
+## 1. Download Historical Weather Data
+
+Download the daily weather data for each year from the [Meteorological Service Singapore](https://www.weather.gov.sg/climate-historical-daily/) website. Save all the CSV files into a single folder.
+
+## 2. Combine All CSV Files into One Dataset
+
+We used the `data.table` package to read and combine multiple CSV files stored in one directory.
+
+``` r
+library(data.table)
+
+file_list <- list.files(pattern = "\\.csv$")
+
+# Read and combine all CSVs
+weather_data <- rbindlist(lapply(file_list, fread), fill = TRUE)
+```
+
+## 3. Convert Year, Month, Day to a Single Date Column
+
+Assuming each CSV file includes columns for `Year`, `Month`, and `Day`:
+
+``` r
+# Combine year, month, and day into a proper date
+weather_data[, Date := as.Date(paste(Year, Month, Day, sep = "-"))]
+
+# Remove the original columns
+weather_data[, c("Year", "Month", "Day") := NULL]
+```
+
+## 4. Add Region Column
+
+We map the region using a predefined vector based on the station name.
+
+``` r
+region_map <- c(
+  "Admiralty" = "North",
+  "Ang Mo Kio" = "Northeast",
+  "Changi" = "East",
+  "Choa Chu Kang (South)" = "West",
+  "Clementi" = "West",
+  "East Coast Parkway" = "East",
+  "Jurong (West)" = "West",
+  "Jurong Island" = "West",
+  "Marina Barrage" = "Central",
+  "Newton" = "Central",
+  "Pasir Panjang" = "Central",
+  "Paya Lebar" = "Central",
+  "Pulau Ubin" = "Northeast",
+  "Seletar" = "North",
+  "Sembawang" = "North",
+  "Sentosa Island" = "Central",
+  "Tai Seng" = "Northeast",
+  "Tengah" = "West",
+  "Tuas South" = "West"
+)
+
+weather_data[, Region := region_map[Station]]
+```
+
+## 5. Add Latitude and Longitude
+
+We join latitude and longitude coordinates using a [reference table](https://www.weather.gov.sg/wp-content/uploads/2024/08/Station_Records.pdf).
+
+``` r
+data_coords <- data.table(
+  Station = c("Admiralty", "Ang Mo Kio", "Changi", "Choa Chu Kang (South)", "Clementi", "East Coast Parkway", 
+              "Jurong (West)", "Jurong Island", "Marina Barrage", "Newton", "Pasir Panjang", "Paya Lebar", 
+              "Pulau Ubin", "Seletar", "Sembawang", "Sentosa Island", "Tai Seng", "Tengah", "Tuas South"),
+  Latitude = c(1.4439, 1.3793, 1.3678, 1.3729, 1.3318, 1.3133, 1.3458, 1.2542, 1.2799, 1.3106, 1.2824, 
+               1.3571, 1.4168, 1.4167, 1.4250, 1.2503, 1.3406, 1.3858, 1.2938),
+  Longitude = c(103.7854, 103.8500, 103.9823, 103.7224, 103.7762, 103.9620, 103.6817, 103.6741, 103.8703, 
+                103.8365, 103.7545, 103.9037, 103.9673, 103.8650, 103.8200, 103.8275, 103.8882, 103.7119, 
+                103.6184)
+)
+
+weather_data <- merge(weather_data, data_coords, by = "Station", all.x = TRUE)
+```
+
+## 6. Sort Data
+
+Group by station alphabetically and sort dates chronologically within each station.
+
+``` r
+# Sort data
+setorder(weather_data, Station, Date)
+```
+
+## 7. Check for Duplicates and Missing Values
+
+Ensure data integrity by checking for duplicates and missing values.
+
+```{r}
+pacman::p_load(tidyverse, naniar)
+
+weather_data <-read_csv("data/weather_data.csv")
+
+duplicates <- weather_data %>% 
+  filter(duplicated(.))
+
+print(duplicates)
+vis_miss(weather_data)
+
+
+```

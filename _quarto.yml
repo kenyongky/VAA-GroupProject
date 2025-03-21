@@ -13,6 +13,10 @@ website:
           text: Proposal (old)
         - href: proposal.qmd
           text: Proposal (revised)
+      - text: "Prototype"
+        menu:
+        - href: data_prep.qmd
+          text: Data Preparation
       - about.qmd
     
 
