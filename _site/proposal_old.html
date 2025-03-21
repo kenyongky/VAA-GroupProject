@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Group 15">
 
-<title>Revised Project Proposal: WeatherXplore – WeatherXplore</title>
+<title>Project Proposal – WeatherXplore</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -127,20 +128,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><strong>1. Overview</strong></a></li>
-  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><strong>2. Motivation</strong></a></li>
-  <li><a href="#the-problems-addressed" id="toc-the-problems-addressed" class="nav-link" data-scroll-target="#the-problems-addressed"><strong>3. The Problems Addressed</strong></a></li>
-  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources"><strong>4. Data Sources</strong></a></li>
-  <li><a href="#approach-and-methodology" id="toc-approach-and-methodology" class="nav-link" data-scroll-target="#approach-and-methodology"><strong>5. Approach and Methodology</strong></a>
-  <ul class="collapse">
-  <li><a href="#exploratory-confirmatory-data-analysis-priya" id="toc-exploratory-confirmatory-data-analysis-priya" class="nav-link" data-scroll-target="#exploratory-confirmatory-data-analysis-priya"><strong>5.1 Exploratory &amp; Confirmatory Data Analysis (Priya)</strong></a></li>
-  <li><a href="#time-series-analysis-forecasting-phoo" id="toc-time-series-analysis-forecasting-phoo" class="nav-link" data-scroll-target="#time-series-analysis-forecasting-phoo"><strong>5.2 Time Series Analysis &amp; Forecasting (Phoo)</strong></a></li>
-  <li><a href="#geospatial-analysis-kenneth" id="toc-geospatial-analysis-kenneth" class="nav-link" data-scroll-target="#geospatial-analysis-kenneth"><strong>5.3 Geospatial Analysis (Kenneth)</strong></a></li>
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><strong>5.4 Data Preparation</strong></a></li>
-  </ul></li>
-  <li><a href="#implementation-timeline" id="toc-implementation-timeline" class="nav-link" data-scroll-target="#implementation-timeline"><strong>6. Implementation Timeline</strong></a></li>
-  <li><a href="#expected-outcome" id="toc-expected-outcome" class="nav-link" data-scroll-target="#expected-outcome"><strong>7. Expected Outcome</strong></a></li>
-  <li><a href="#tools-technologies" id="toc-tools-technologies" class="nav-link" data-scroll-target="#tools-technologies"><strong>8. Tools &amp; Technologies</strong></a></li>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">1. Project Overview</a></li>
+  <li><a href="#problem-statement" id="toc-problem-statement" class="nav-link" data-scroll-target="#problem-statement">2. Problem Statement</a></li>
+  <li><a href="#related-work" id="toc-related-work" class="nav-link" data-scroll-target="#related-work">3. Related Work</a></li>
+  <li><a href="#project-objectives" id="toc-project-objectives" class="nav-link" data-scroll-target="#project-objectives">4. Project Objectives</a></li>
+  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">5. Methodology</a></li>
+  <li><a href="#key-features-functionality" id="toc-key-features-functionality" class="nav-link" data-scroll-target="#key-features-functionality">6. Key Features &amp; Functionality</a></li>
+  <li><a href="#early-prototype" id="toc-early-prototype" class="nav-link" data-scroll-target="#early-prototype">7. Early Prototype</a></li>
+  <li><a href="#project-timeline" id="toc-project-timeline" class="nav-link" data-scroll-target="#project-timeline">8. Project Timeline</a></li>
   </ul>
 </nav>
     </div>
@@ -149,13 +144,19 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Revised Project Proposal: WeatherXplore</h1>
+<h1 class="title">Project Proposal</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Group 15 </p>
+          </div>
+  </div>
     
   
     
@@ -166,145 +167,91 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview"><strong>1. Overview</strong></h2>
-<p>This project aims to develop an interactive visual analytics tool for Singapore’s climate data. While historical weather data is publicly available, existing platforms lack comprehensive visualizations, advanced forecasting capabilities, and spatial interpolation techniques. Our solution will integrate various R packages to provide in-depth climate analytics.</p>
+<p><strong>WeatherXplore: Interactive Analytics for Smarter Living</strong></p>
+<section id="project-overview" class="level1">
+<h1>1. Project Overview</h1>
+<p>Weather significantly impacts daily life, influencing outdoor activities, travel, public safety, and health. Understanding historical weather trends and real-time data can provide valuable insights for better decision-making. This project aims to develop a <strong>web-enabled interactive analytics platform</strong> using <strong>Shiny</strong> that enables users to explore and analyze weather data in Singapore.</p>
+<p>Our goal is to democratize access to weather analytics by integrating advanced data visualization and predictive modeling techniques into a user-friendly interface. The application will assist users in optimizing their daily activities, selecting appropriate clothing, and planning outdoor events based on weather patterns. Additionally, it will provide insights into climate trends and extreme weather events, benefiting policymakers, researchers, and the general public.</p>
 </section>
-<section id="motivation" class="level2">
-<h2 class="anchored" data-anchor-id="motivation"><strong>2. Motivation</strong></h2>
-<p>Singapore’s National Environment Agency provides access to historical weather data, but the available tools lack interactivity, comparative analysis, and advanced statistical modeling. This project addresses these gaps by:</p>
+<section id="problem-statement" class="level1">
+<h1>2. Problem Statement</h1>
+<p>Despite the availability of weather forecasts, many individuals and industries lack customized, data-driven insights that help them plan effectively. The challenges include:</p>
 <ul>
-<li><p>Providing interactive and comparative visualizations of weather trends.</p></li>
-<li><p>Conducting advanced time-series forecasting for rainfall and temperature.</p></li>
-<li><p>Utilizing geospatial interpolation techniques to estimate weather conditions at unmonitored locations.</p></li>
+<li><p><strong>Uncertainty in Outdoor Planning</strong>: Users struggle with unpredictable rainfall, high UV levels, and fluctuating temperatures when scheduling activities.</p></li>
+<li><p><strong>Health Risks from Weather Exposure</strong>: Extreme temperatures and UV levels pose risks such as heatstroke, dehydration, and skin damage.</p></li>
+<li><p><strong>Lack of Data-Driven Travel &amp; Activity Recommendations</strong>: Current weather apps provide forecasts but do not offer <strong>historical trend analysis</strong> to guide travel and event planning.</p></li>
+<li><p><strong>Limited Awareness of Severe Weather Conditions</strong>: There is a need for real-time alerts on extreme weather events to enhance preparedness and safety.</p></li>
 </ul>
 </section>
-<section id="the-problems-addressed" class="level2">
-<h2 class="anchored" data-anchor-id="the-problems-addressed"><strong>3. The Problems Addressed</strong></h2>
+<section id="related-work" class="level1">
+<h1>3. Related Work</h1>
+<p>Several existing weather applications, including <strong>Google Weather, Apple Weather, and AccuWeather</strong>, provide real-time forecasts but lack interactive historical trend analysis and personalized recommendations. The <strong>Meteorological Service Singapore (MSS)</strong> offers online reports, but these are often static and do not allow dynamic data exploration.</p>
+<p>Our project enhances existing functionalities by integrating <strong>interactive dashboards, predictive analytics, and real-time safety alerts</strong>, providing users with actionable weather insights tailored to their needs.</p>
+</section>
+<section id="project-objectives" class="level1">
+<h1>4. Project Objectives</h1>
+<ol type="1">
+<li><p><strong>Develop an interactive web-based dashboard</strong> that visualizes historical and real-time weather data from <strong>Meteorological Service Singapore</strong>.</p></li>
+<li><p><strong>Provide weather-aware activity and travel recommendations</strong>, helping users plan events and outdoor activities based on temperature, UV index, humidity, and precipitation trends.</p></li>
+<li><p><strong>Incorporate safety advisories</strong>, including UV exposure warnings, clothing recommendations, and severe weather alerts.</p></li>
+<li><p><strong>Enable interactive filtering and data exploration</strong>, allowing users to analyze weather patterns by time period, location, and variable type.</p></li>
+<li><p><strong>Implement predictive analytics</strong>, utilizing machine learning models to estimate future weather trends and patterns.</p></li>
+<li><p><strong>Ensure accessibility and usability</strong>, making the tool suitable for both the general public and specialized users like policymakers and researchers.</p></li>
+</ol>
+</section>
+<section id="methodology" class="level1">
+<h1>5. Methodology</h1>
+<p><strong>Data Collection</strong>: Obtain historical weather data from <strong>Visual Crossing</strong> and real-time updates from meteorological sources.</p>
+<p><strong>Data Preprocessing</strong>: Clean and standardize data, handling missing values and ensuring consistency.</p>
+<p><strong>Shiny Application Development</strong>:</p>
 <ul>
-<li><p>Current government tools are static and offer limited interactivity.</p></li>
-<li><p>No existing system provides an integrated platform for time-series analysis and forecasting.</p></li>
-<li><p>Spatial interpolation is missing, restricting accurate weather estimations beyond monitored stations.</p></li>
+<li><p><strong>Frontend</strong>: Design an interactive dashboard using <strong>Shiny UI components</strong>.</p></li>
+<li><p><strong>Backend</strong>: Implement data processing and visualization using <strong>ggplot2, leaflet, and plotly</strong>.</p></li>
+<li><p><strong>Interactivity Features</strong>: Include date filters, region selectors, and variable comparisons.</p></li>
+<li><p><strong>Deployment</strong>: Host the application on <strong>shinyapps.io</strong> for easy public access.</p></li>
 </ul>
 </section>
-<section id="data-sources" class="level2">
-<h2 class="anchored" data-anchor-id="data-sources"><strong>4. Data Sources</strong></h2>
+<section id="key-features-functionality" class="level1">
+<h1>6. Key Features &amp; Functionality</h1>
+<section id="weather-aware-activity-travel-planner" class="level4">
+<h4 class="anchored" data-anchor-id="weather-aware-activity-travel-planner"><strong>6.1 Weather-Aware Activity &amp; Travel Planner</strong></h4>
 <ul>
-<li><p><strong>Climate Historical Daily Records (Weather.gov.sg)</strong></p>
-<p>The Meteorological Service Singapore provides a publicly accessible repository of historical daily weather data. The dataset includes:</p>
-<ul>
-<li><p><strong>Temperature and Rainfall Data</strong>: Recorded at 19 weather stations across Singapore.</p></li>
-<li><p><strong>Time Span</strong>: 5 years (2019-2024), providing a rich dataset to analyze weather trends and variations.</p></li>
-<li><p><strong>Data Frequency</strong>: Daily records capturing temperature highs/lows and total rainfall.</p></li>
-<li><p><strong>Spatial Coverage</strong>: Covers multiple monitoring stations, offering regional weather insights.</p></li>
-<li><p><strong>Missing Data Handling</strong>: Any gaps in the dataset are addressed through imputation techniques such as simple moving averages.</p></li>
-<li><p><strong>Data Format</strong>: The dataset is available in structured tabular formats, making it suitable for integration with R-based analytical tools.</p></li>
-<li><p><strong>Source</strong>: Data retrieved from <a href="https://www.weather.gov.sg/climate-historical-daily/">Weather.gov.sg</a>, ensuring credibility and consistency with Singapore’s official climate records.</p></li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Dataset</th>
-<th>Frequency</th>
-<th>Period</th>
-<th>Source</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Climate Historical Daily Records (rainfall, temperature)</td>
-<td>Daily</td>
-<td>2019-2024</td>
-<td><a href="https://www.weather.gov.sg/climate-historical-daily/" class="uri">https://www.weather.gov.sg/climate-historical-daily/</a></td>
-</tr>
-</tbody>
-</table></li>
+<li><p>Identifies optimal time slots for outdoor activities based on temperature, humidity, UV index, and precipitation trends.</p></li>
+<li><p>Visual heatmaps and trend graphs to display the best times for outdoor events.</p></li>
+<li><p>Rainfall trend analysis through line charts and bar graphs to highlight seasonal variations.</p></li>
+<li><p>Interactive travel and event advisory system integrating both historical data and real-time forecasts.</p></li>
 </ul>
 </section>
-<section id="approach-and-methodology" class="level2">
-<h2 class="anchored" data-anchor-id="approach-and-methodology"><strong>5. Approach and Methodology</strong></h2>
-<p>The tool will be developed in <strong>R Shiny</strong>, divided into three core modules:</p>
-<section id="exploratory-confirmatory-data-analysis-priya" class="level3">
-<h3 class="anchored" data-anchor-id="exploratory-confirmatory-data-analysis-priya"><strong>5.1 Exploratory &amp; Confirmatory Data Analysis (Priya)</strong></h3>
+<section id="uv-index-skin-safety-advisory" class="level4">
+<h4 class="anchored" data-anchor-id="uv-index-skin-safety-advisory"><strong>6.2 UV Index &amp; Skin Safety Advisory</strong></h4>
 <ul>
-<li><p>Analyzing temperature and rainfall variations over five years.</p></li>
-<li><p>Ridge plots to visualize station-wise trends over time.</p></li>
-<li><p>Calendar heatmaps to capture daily temperature changes.</p></li>
-<li><p>Comparative statistical tests to validate observed patterns.</p></li>
+<li><p>Monitors UV index levels throughout the day.</p></li>
+<li><p>Provides real-time sunscreen and clothing recommendations to minimize skin damage.</p></li>
+<li><p>Displays UV index heatmaps and safety alerts.</p></li>
 </ul>
 </section>
-<section id="time-series-analysis-forecasting-phoo" class="level3">
-<h3 class="anchored" data-anchor-id="time-series-analysis-forecasting-phoo"><strong>5.2 Time Series Analysis &amp; Forecasting (Phoo)</strong></h3>
+<section id="predictive-analytics-climate-trend-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="predictive-analytics-climate-trend-analysis"><strong>6.3 Predictive Analytics &amp; Climate Trend Analysis</strong></h4>
 <ul>
-<li><p>Decomposition of time-series data into <strong>trend, seasonal, and white noise</strong> components.</p></li>
-<li><p>Implementation of <strong>ARIMA and exponential smoothing</strong> models for forecasting.</p></li>
-<li><p>Model validation and performance comparison.</p></li>
-</ul>
-</section>
-<section id="geospatial-analysis-kenneth" class="level3">
-<h3 class="anchored" data-anchor-id="geospatial-analysis-kenneth"><strong>5.3 Geospatial Analysis (Kenneth)</strong></h3>
-<ul>
-<li><p><strong>Geofacet visualizations</strong> to compare weather variations across different locations.</p></li>
-<li><p><strong>Spatial interpolation</strong> to estimate rainfall and temperature beyond monitored stations.</p></li>
-<li><p>Using Singapore’s official climate datasets for interpolation techniques.</p></li>
-</ul>
-</section>
-<section id="data-preparation" class="level3">
-<h3 class="anchored" data-anchor-id="data-preparation"><strong>5.4 Data Preparation</strong></h3>
-<ul>
-<li><p>Consolidation of multiple datasets into a structured format.</p></li>
-<li><p>Handling missing values and standardizing variable names.</p></li>
-<li><p>Code implementation to combine and clean datasets efficiently.</p></li>
+<li><p>Implements <strong>time series forecasting</strong> models to predict future weather trends.</p></li>
+<li><p>Analyzes long-term climate trends and their potential impacts on Singapore.</p></li>
+<li><p>Provides insights into climate change indicators using interactive visualizations.</p></li>
 </ul>
 </section>
 </section>
-<section id="implementation-timeline" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-timeline"><strong>6. Implementation Timeline</strong></h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Task</th>
-<th>Deadline</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Proposal Revision</td>
-<td>March 20, 2025</td>
-</tr>
-<tr class="even">
-<td>Prototype Completion</td>
-<td>March 22, 2025 (4 PM)</td>
-</tr>
-<tr class="odd">
-<td>Shiny App Development</td>
-<td>March 29, 2025 (4-6 PM)</td>
-</tr>
-<tr class="even">
-<td>User Guide Preparation</td>
-<td>March 30, 2025</td>
-</tr>
-<tr class="odd">
-<td>Poster Preparation</td>
-<td>March 30, 2025</td>
-</tr>
-</tbody>
-</table>
+<section id="early-prototype" class="level1">
+<h1>7. Early Prototype</h1>
+<p>The initial prototype will include:</p>
+<ol type="1">
+<li><p>A <strong>homepage</strong> with key weather trends and insights.</p></li>
+<li><p>A <strong>dashboard with interactive charts</strong> for temperature, precipitation, and humidity trends.</p></li>
+<li><p>A <strong>map-based interface</strong> for geospatial weather analysis.</p></li>
+<li><p>A <strong>forecasting section</strong> utilizing predictive models to estimate future trends.</p></li>
+</ol>
 </section>
-<section id="expected-outcome" class="level2">
-<h2 class="anchored" data-anchor-id="expected-outcome"><strong>7. Expected Outcome</strong></h2>
-<ul>
-<li><p>A <strong>web-based visual analytics tool</strong> allowing users to explore historical and predictive weather trends interactively.</p></li>
-<li><p>Advanced <strong>time-series forecasting</strong> with seasonal adjustments.</p></li>
-<li><p><strong>Geospatial interpolation</strong> to estimate climate parameters at unmonitored locations.</p></li>
-<li><p>An <strong>interactive dashboard</strong> enabling policymakers, researchers, and the general public to derive meaningful insights.</p></li>
-</ul>
-</section>
-<section id="tools-technologies" class="level2">
-<h2 class="anchored" data-anchor-id="tools-technologies"><strong>8. Tools &amp; Technologies</strong></h2>
-<ul>
-<li><strong>R Packages:</strong> <code>tidyverse</code>, <code>dplyr</code>, <code>lubridate</code>, <code>tidygraph</code>, <code>ggraph</code>, <code>visNetwork</code>, <code>ggplot2</code>, <code>shiny</code>, <code>leaflet</code>, <code>sf</code>.</li>
-</ul>
+<section id="project-timeline" class="level1">
+<h1>8. Project Timeline</h1>
+<p><img src="images/Screenshot 2025-03-11 234224.png" class="img-fluid"></p>
 
 
 </section>

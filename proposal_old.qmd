@@ -1,0 +1,104 @@
+---
+title: "Project Proposal"
+author: "Group 15"
+---
+
+**WeatherXplore: Interactive Analytics for Smarter Living**
+
+# 1. Project Overview
+
+Weather significantly impacts daily life, influencing outdoor activities, travel, public safety, and health. Understanding historical weather trends and real-time data can provide valuable insights for better decision-making. This project aims to develop a **web-enabled interactive analytics platform** using **Shiny** that enables users to explore and analyze weather data in Singapore.
+
+Our goal is to democratize access to weather analytics by integrating advanced data visualization and predictive modeling techniques into a user-friendly interface. The application will assist users in optimizing their daily activities, selecting appropriate clothing, and planning outdoor events based on weather patterns. Additionally, it will provide insights into climate trends and extreme weather events, benefiting policymakers, researchers, and the general public.
+
+# 2. Problem Statement
+
+Despite the availability of weather forecasts, many individuals and industries lack customized, data-driven insights that help them plan effectively. The challenges include:
+
+-   **Uncertainty in Outdoor Planning**: Users struggle with unpredictable rainfall, high UV levels, and fluctuating temperatures when scheduling activities.
+
+-   **Health Risks from Weather Exposure**: Extreme temperatures and UV levels pose risks such as heatstroke, dehydration, and skin damage.
+
+-   **Lack of Data-Driven Travel & Activity Recommendations**: Current weather apps provide forecasts but do not offer **historical trend analysis** to guide travel and event planning.
+
+-   **Limited Awareness of Severe Weather Conditions**: There is a need for real-time alerts on extreme weather events to enhance preparedness and safety.
+
+# 3. Related Work
+
+Several existing weather applications, including **Google Weather, Apple Weather, and AccuWeather**, provide real-time forecasts but lack interactive historical trend analysis and personalized recommendations. The **Meteorological Service Singapore (MSS)** offers online reports, but these are often static and do not allow dynamic data exploration.
+
+Our project enhances existing functionalities by integrating **interactive dashboards, predictive analytics, and real-time safety alerts**, providing users with actionable weather insights tailored to their needs.
+
+# 4. Project Objectives
+
+1.  **Develop an interactive web-based dashboard** that visualizes historical and real-time weather data from **Meteorological Service Singapore**.
+
+2.  **Provide weather-aware activity and travel recommendations**, helping users plan events and outdoor activities based on temperature, UV index, humidity, and precipitation trends.
+
+3.  **Incorporate safety advisories**, including UV exposure warnings, clothing recommendations, and severe weather alerts.
+
+4.  **Enable interactive filtering and data exploration**, allowing users to analyze weather patterns by time period, location, and variable type.
+
+5.  **Implement predictive analytics**, utilizing machine learning models to estimate future weather trends and patterns.
+
+6.  **Ensure accessibility and usability**, making the tool suitable for both the general public and specialized users like policymakers and researchers.
+
+# 5. Methodology
+
+**Data Collection**: Obtain historical weather data from **Visual Crossing** and real-time updates from meteorological sources.
+
+**Data Preprocessing**: Clean and standardize data, handling missing values and ensuring consistency.
+
+**Shiny Application Development**:
+
+-   **Frontend**: Design an interactive dashboard using **Shiny UI components**.
+
+-   **Backend**: Implement data processing and visualization using **ggplot2, leaflet, and plotly**.
+
+-   **Interactivity Features**: Include date filters, region selectors, and variable comparisons.
+
+-   **Deployment**: Host the application on **shinyapps.io** for easy public access.
+
+# 6. Key Features & Functionality
+
+#### **6.1 Weather-Aware Activity & Travel Planner**
+
+-   Identifies optimal time slots for outdoor activities based on temperature, humidity, UV index, and precipitation trends.
+
+-   Visual heatmaps and trend graphs to display the best times for outdoor events.
+
+-   Rainfall trend analysis through line charts and bar graphs to highlight seasonal variations.
+
+-   Interactive travel and event advisory system integrating both historical data and real-time forecasts.
+
+#### **6.2 UV Index & Skin Safety Advisory**
+
+-   Monitors UV index levels throughout the day.
+
+-   Provides real-time sunscreen and clothing recommendations to minimize skin damage.
+
+-   Displays UV index heatmaps and safety alerts.
+
+#### **6.3 Predictive Analytics & Climate Trend Analysis**
+
+-   Implements **time series forecasting** models to predict future weather trends.
+
+-   Analyzes long-term climate trends and their potential impacts on Singapore.
+
+-   Provides insights into climate change indicators using interactive visualizations.
+
+# 7. Early Prototype
+
+The initial prototype will include:
+
+1.  A **homepage** with key weather trends and insights.
+
+2.  A **dashboard with interactive charts** for temperature, precipitation, and humidity trends.
+
+3.  A **map-based interface** for geospatial weather analysis.
+
+4.  A **forecasting section** utilizing predictive models to estimate future trends.
+
+# 8. Project Timeline
+
+![](images/Screenshot%202025-03-11%20234224.png)

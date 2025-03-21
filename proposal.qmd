@@ -1,104 +1,111 @@
 ---
-title: "Project Proposal"
-author: "Group 15"
+title: "Revised Project Proposal: WeatherXplore"
 ---
 
-**WeatherXplore: Interactive Analytics for Smarter Living**
+## **1. Overview**
 
-# 1. Project Overview
+This project aims to develop an interactive visual analytics tool for Singapore’s climate data. While historical weather data is publicly available, existing platforms lack comprehensive visualizations, advanced forecasting capabilities, and spatial interpolation techniques. Our solution will integrate various R packages to provide in-depth climate analytics.
 
-Weather significantly impacts daily life, influencing outdoor activities, travel, public safety, and health. Understanding historical weather trends and real-time data can provide valuable insights for better decision-making. This project aims to develop a **web-enabled interactive analytics platform** using **Shiny** that enables users to explore and analyze weather data in Singapore.
+## **2. Motivation**
 
-Our goal is to democratize access to weather analytics by integrating advanced data visualization and predictive modeling techniques into a user-friendly interface. The application will assist users in optimizing their daily activities, selecting appropriate clothing, and planning outdoor events based on weather patterns. Additionally, it will provide insights into climate trends and extreme weather events, benefiting policymakers, researchers, and the general public.
+Singapore’s National Environment Agency provides access to historical weather data, but the available tools lack interactivity, comparative analysis, and advanced statistical modeling. This project addresses these gaps by:
 
-# 2. Problem Statement
+-   Providing interactive and comparative visualizations of weather trends.
 
-Despite the availability of weather forecasts, many individuals and industries lack customized, data-driven insights that help them plan effectively. The challenges include:
+-   Conducting advanced time-series forecasting for rainfall and temperature.
 
--   **Uncertainty in Outdoor Planning**: Users struggle with unpredictable rainfall, high UV levels, and fluctuating temperatures when scheduling activities.
+-   Utilizing geospatial interpolation techniques to estimate weather conditions at unmonitored locations.
 
--   **Health Risks from Weather Exposure**: Extreme temperatures and UV levels pose risks such as heatstroke, dehydration, and skin damage.
+## **3. The Problems Addressed**
 
--   **Lack of Data-Driven Travel & Activity Recommendations**: Current weather apps provide forecasts but do not offer **historical trend analysis** to guide travel and event planning.
+-   Current government tools are static and offer limited interactivity.
 
--   **Limited Awareness of Severe Weather Conditions**: There is a need for real-time alerts on extreme weather events to enhance preparedness and safety.
+-   No existing system provides an integrated platform for time-series analysis and forecasting.
 
-# 3. Related Work
+-   Spatial interpolation is missing, restricting accurate weather estimations beyond monitored stations.
 
-Several existing weather applications, including **Google Weather, Apple Weather, and AccuWeather**, provide real-time forecasts but lack interactive historical trend analysis and personalized recommendations. The **Meteorological Service Singapore (MSS)** offers online reports, but these are often static and do not allow dynamic data exploration.
+## **4. Data Sources**
 
-Our project enhances existing functionalities by integrating **interactive dashboards, predictive analytics, and real-time safety alerts**, providing users with actionable weather insights tailored to their needs.
+-   **Climate Historical Daily Records (Weather.gov.sg)**
 
-# 4. Project Objectives
+    The Meteorological Service Singapore provides a publicly accessible repository of historical daily weather data. The dataset includes:
 
-1.  **Develop an interactive web-based dashboard** that visualizes historical and real-time weather data from **Meteorological Service Singapore**.
+    -   **Temperature and Rainfall Data**: Recorded at 19 weather stations across Singapore.
 
-2.  **Provide weather-aware activity and travel recommendations**, helping users plan events and outdoor activities based on temperature, UV index, humidity, and precipitation trends.
+    -   **Time Span**: 5 years (2019-2024), providing a rich dataset to analyze weather trends and variations.
 
-3.  **Incorporate safety advisories**, including UV exposure warnings, clothing recommendations, and severe weather alerts.
+    -   **Data Frequency**: Daily records capturing temperature highs/lows and total rainfall.
 
-4.  **Enable interactive filtering and data exploration**, allowing users to analyze weather patterns by time period, location, and variable type.
+    -   **Spatial Coverage**: Covers multiple monitoring stations, offering regional weather insights.
 
-5.  **Implement predictive analytics**, utilizing machine learning models to estimate future weather trends and patterns.
+    -   **Missing Data Handling**: Any gaps in the dataset are addressed through imputation techniques such as simple moving averages.
 
-6.  **Ensure accessibility and usability**, making the tool suitable for both the general public and specialized users like policymakers and researchers.
+    -   **Data Format**: The dataset is available in structured tabular formats, making it suitable for integration with R-based analytical tools.
 
-# 5. Methodology
+    -   **Source**: Data retrieved from [Weather.gov.sg](https://www.weather.gov.sg/climate-historical-daily/), ensuring credibility and consistency with Singapore’s official climate records.
 
-**Data Collection**: Obtain historical weather data from **Visual Crossing** and real-time updates from meteorological sources.
+    | Dataset | Frequency | Period | Source |
+    |----|----|----|----|
+    | Climate Historical Daily Records (rainfall, temperature) | Daily | 2019-2024 | <https://www.weather.gov.sg/climate-historical-daily/> |
 
-**Data Preprocessing**: Clean and standardize data, handling missing values and ensuring consistency.
+## **5. Approach and Methodology**
 
-**Shiny Application Development**:
+The tool will be developed in **R Shiny**, divided into three core modules:
 
--   **Frontend**: Design an interactive dashboard using **Shiny UI components**.
+### **5.1 Exploratory & Confirmatory Data Analysis (Priya)**
 
--   **Backend**: Implement data processing and visualization using **ggplot2, leaflet, and plotly**.
+-   Analyzing temperature and rainfall variations over five years.
 
--   **Interactivity Features**: Include date filters, region selectors, and variable comparisons.
+-   Ridge plots to visualize station-wise trends over time.
 
--   **Deployment**: Host the application on **shinyapps.io** for easy public access.
+-   Calendar heatmaps to capture daily temperature changes.
 
-# 6. Key Features & Functionality
+-   Comparative statistical tests to validate observed patterns.
 
-#### **6.1 Weather-Aware Activity & Travel Planner**
+### **5.2 Time Series Analysis & Forecasting (Phoo)**
 
--   Identifies optimal time slots for outdoor activities based on temperature, humidity, UV index, and precipitation trends.
+-   Decomposition of time-series data into **trend, seasonal, and white noise** components.
 
--   Visual heatmaps and trend graphs to display the best times for outdoor events.
+-   Implementation of **ARIMA and exponential smoothing** models for forecasting.
 
--   Rainfall trend analysis through line charts and bar graphs to highlight seasonal variations.
+-   Model validation and performance comparison.
 
--   Interactive travel and event advisory system integrating both historical data and real-time forecasts.
+### **5.3 Geospatial Analysis (Kenneth)**
 
-#### **6.2 UV Index & Skin Safety Advisory**
+-   **Geofacet visualizations** to compare weather variations across different locations.
 
--   Monitors UV index levels throughout the day.
+-   **Spatial interpolation** to estimate rainfall and temperature beyond monitored stations.
 
--   Provides real-time sunscreen and clothing recommendations to minimize skin damage.
+-   Using Singapore’s official climate datasets for interpolation techniques.
 
--   Displays UV index heatmaps and safety alerts.
+### **5.4 Data Preparation**
 
-#### **6.3 Predictive Analytics & Climate Trend Analysis**
+-   Consolidation of multiple datasets into a structured format.
 
--   Implements **time series forecasting** models to predict future weather trends.
+-   Handling missing values and standardizing variable names.
 
--   Analyzes long-term climate trends and their potential impacts on Singapore.
+-   Code implementation to combine and clean datasets efficiently.
 
--   Provides insights into climate change indicators using interactive visualizations.
+## **6. Implementation Timeline**
 
-# 7. Early Prototype
+| Task                   | Deadline                |
+|------------------------|-------------------------|
+| Proposal Revision      | March 20, 2025          |
+| Prototype Completion   | March 22, 2025 (4 PM)   |
+| Shiny App Development  | March 29, 2025 (4-6 PM) |
+| User Guide Preparation | March 30, 2025          |
+| Poster Preparation     | March 30, 2025          |
 
-The initial prototype will include:
+## **7. Expected Outcome**
 
-1.  A **homepage** with key weather trends and insights.
+-   A **web-based visual analytics tool** allowing users to explore historical and predictive weather trends interactively.
 
-2.  A **dashboard with interactive charts** for temperature, precipitation, and humidity trends.
+-   Advanced **time-series forecasting** with seasonal adjustments.
 
-3.  A **map-based interface** for geospatial weather analysis.
+-   **Geospatial interpolation** to estimate climate parameters at unmonitored locations.
 
-4.  A **forecasting section** utilizing predictive models to estimate future trends.
+-   An **interactive dashboard** enabling policymakers, researchers, and the general public to derive meaningful insights.
 
-# 8. Project Timeline
+## **8. Tools & Technologies**
 
-![](images/Screenshot 2025-03-11 234224.png)
+-   **R Packages:** `tidyverse`, `dplyr`, `lubridate`, `tidygraph`, `ggraph`, `visNetwork`, `ggplot2`, `shiny`, `leaflet`, `sf`.
