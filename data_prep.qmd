@@ -126,13 +126,17 @@ Ensure data integrity by checking for duplicates and missing values.
 ```{r}
 pacman::p_load(tidyverse, naniar, lubridate)
 
-weather_data <-read_csv("data/weather_data_clean.csv")
+weather_data_clean <-read_csv("data/weather_data_clean.csv")
 
-duplicates <- weather_data %>% 
+duplicates <- weather_data_clean %>% 
   filter(duplicated(.))
 
 print(duplicates)
-vis_miss(weather_data)
+vis_miss(weather_data_clean)
+```
 
+## 10. A glimpse at the dataset
 
+```{r}
+glimpse(weather_data_clean)
 ```
