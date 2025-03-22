@@ -94,14 +94,39 @@ Group by station alphabetically and sort dates chronologically within each stati
 setorder(weather_data, Station, Date)
 ```
 
-## 7. Check for Duplicates and Missing Values
+## 7. Convert column data type
+
+Convert data types such that 'Region' and 'Station' remain as character, 'Date' becomes a proper date type and all other columns become numeric.
+
+``` r
+weather_data_clean <- weather_data %>%
+  mutate(
+    Date = dmy(Date),  # Convert Date column to Date format (from d/m/yyyy)
+    across(
+      .cols = -c(Region, Station, Date),  # Select all except these columns
+      .fns = ~ as.numeric(.)
+    )
+  )
+```
+
+## 8. Export datasets as CSV and RDS
+
+``` r
+# Export as CSV
+write.csv(weather_data_clean, "weather_data_clean.csv", row.names = FALSE)
+
+# Export as RDS
+saveRDS(weather_data_clean, "weather_data_clean.rds")
+```
+
+## 9. Check for Duplicates and Missing Values
 
 Ensure data integrity by checking for duplicates and missing values.
 
 ```{r}
-pacman::p_load(tidyverse, naniar)
+pacman::p_load(tidyverse, naniar, lubridate)
 
-weather_data <-read_csv("data/weather_data.csv")
+weather_data <-read_csv("data/weather_data_clean.csv")
 
 duplicates <- weather_data %>% 
   filter(duplicated(.))

@@ -143,7 +143,21 @@
     "objectID": "data_prep.html#check-for-duplicates-and-missing-values",
     "href": "data_prep.html#check-for-duplicates-and-missing-values",
     "title": "Data Preparation",
-    "section": "7. Check for Duplicates and Missing Values",
-    "text": "7. Check for Duplicates and Missing Values\nEnsure data integrity by checking for duplicates and missing values.\n\npacman::p_load(tidyverse, naniar)\n\nweather_data &lt;-read_csv(\"data/weather_data.csv\")\n\nRows: 34124 Columns: 14\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (12): Region, Station, Date, Daily Rainfall Total (mm), Highest 30 min R...\ndbl  (2): Latitude, Longitude\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nduplicates &lt;- weather_data %&gt;% \n  filter(duplicated(.))\n\nprint(duplicates)\n\n# A tibble: 0 × 14\n# ℹ 14 variables: Region &lt;chr&gt;, Station &lt;chr&gt;, Date &lt;chr&gt;,\n#   Daily Rainfall Total (mm) &lt;chr&gt;, Highest 30 min Rainfall (mm) &lt;chr&gt;,\n#   Highest 60 min Rainfall (mm) &lt;chr&gt;, Highest 120 min Rainfall (mm) &lt;chr&gt;,\n#   Mean Temperature (°C) &lt;chr&gt;, Maximum Temperature (°C) &lt;chr&gt;,\n#   Minimum Temperature (°C) &lt;chr&gt;, Mean Wind Speed (km/h) &lt;chr&gt;,\n#   Max Wind Speed (km/h) &lt;chr&gt;, Latitude &lt;dbl&gt;, Longitude &lt;dbl&gt;\n\nvis_miss(weather_data)"
+    "section": "9. Check for Duplicates and Missing Values",
+    "text": "9. Check for Duplicates and Missing Values\nEnsure data integrity by checking for duplicates and missing values.\n\npacman::p_load(tidyverse, naniar, lubridate)\n\nweather_data &lt;-read_csv(\"data/weather_data_clean.csv\")\n\nRows: 34124 Columns: 14\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr   (2): Region, Station\ndbl  (11): Daily Rainfall Total (mm), Highest 30 min Rainfall (mm), Highest ...\ndate  (1): Date\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nduplicates &lt;- weather_data %&gt;% \n  filter(duplicated(.))\n\nprint(duplicates)\n\n# A tibble: 0 × 14\n# ℹ 14 variables: Region &lt;chr&gt;, Station &lt;chr&gt;, Date &lt;date&gt;,\n#   Daily Rainfall Total (mm) &lt;dbl&gt;, Highest 30 min Rainfall (mm) &lt;dbl&gt;,\n#   Highest 60 min Rainfall (mm) &lt;dbl&gt;, Highest 120 min Rainfall (mm) &lt;dbl&gt;,\n#   Mean Temperature (°C) &lt;dbl&gt;, Maximum Temperature (°C) &lt;dbl&gt;,\n#   Minimum Temperature (°C) &lt;dbl&gt;, Mean Wind Speed (km/h) &lt;dbl&gt;,\n#   Max Wind Speed (km/h) &lt;dbl&gt;, Latitude &lt;dbl&gt;, Longitude &lt;dbl&gt;\n\nvis_miss(weather_data)"
+  },
+  {
+    "objectID": "data_prep.html#convert-column-data-type",
+    "href": "data_prep.html#convert-column-data-type",
+    "title": "Data Preparation",
+    "section": "7. Convert column data type",
+    "text": "7. Convert column data type\nConvert data types such that ‘Region’ and ‘Station’ remain as character, ‘Date’ becomes a proper date type and all other columns become numeric.\nweather_data_clean &lt;- weather_data %&gt;%\n  mutate(\n    Date = dmy(Date),  # Convert Date column to Date format (from d/m/yyyy)\n    across(\n      .cols = -c(Region, Station, Date),  # Select all except these columns\n      .fns = ~ as.numeric(.)\n    )\n  )"
+  },
+  {
+    "objectID": "data_prep.html#export-datasets-as-csv-and-rds",
+    "href": "data_prep.html#export-datasets-as-csv-and-rds",
+    "title": "Data Preparation",
+    "section": "8. Export datasets as CSV and RDS",
+    "text": "8. Export datasets as CSV and RDS\n# Export as CSV\nwrite.csv(weather_data_clean, \"weather_data_clean.csv\", row.names = FALSE)\n\n# Export as RDS\nsaveRDS(weather_data_clean, \"weather_data_clean.rds\")"
   }
 ]

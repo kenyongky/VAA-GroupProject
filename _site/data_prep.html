@@ -180,7 +180,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#add-region-column" id="toc-add-region-column" class="nav-link" data-scroll-target="#add-region-column">4. Add Region Column</a></li>
   <li><a href="#add-latitude-and-longitude" id="toc-add-latitude-and-longitude" class="nav-link" data-scroll-target="#add-latitude-and-longitude">5. Add Latitude and Longitude</a></li>
   <li><a href="#sort-data" id="toc-sort-data" class="nav-link" data-scroll-target="#sort-data">6. Sort Data</a></li>
-  <li><a href="#check-for-duplicates-and-missing-values" id="toc-check-for-duplicates-and-missing-values" class="nav-link" data-scroll-target="#check-for-duplicates-and-missing-values">7. Check for Duplicates and Missing Values</a></li>
+  <li><a href="#convert-column-data-type" id="toc-convert-column-data-type" class="nav-link" data-scroll-target="#convert-column-data-type">7. Convert column data type</a></li>
+  <li><a href="#export-datasets-as-csv-and-rds" id="toc-export-datasets-as-csv-and-rds" class="nav-link" data-scroll-target="#export-datasets-as-csv-and-rds">8. Export datasets as CSV and RDS</a></li>
+  <li><a href="#check-for-duplicates-and-missing-values" id="toc-check-for-duplicates-and-missing-values" class="nav-link" data-scroll-target="#check-for-duplicates-and-missing-values">9. Check for Duplicates and Missing Values</a></li>
   </ul>
 </nav>
     </div>
@@ -288,37 +290,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort data</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setorder</span>(weather_data, Station, Date)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="convert-column-data-type" class="level2">
+<h2 class="anchored" data-anchor-id="convert-column-data-type">7. Convert column data type</h2>
+<p>Convert data types such that ‘Region’ and ‘Station’ remain as character, ‘Date’ becomes a proper date type and all other columns become numeric.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>weather_data_clean <span class="ot">&lt;-</span> weather_data <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Date =</span> <span class="fu">dmy</span>(Date),  <span class="co"># Convert Date column to Date format (from d/m/yyyy)</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">.cols =</span> <span class="sc">-</span><span class="fu">c</span>(Region, Station, Date),  <span class="co"># Select all except these columns</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">.fns =</span> <span class="sc">~</span> <span class="fu">as.numeric</span>(.)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="export-datasets-as-csv-and-rds" class="level2">
+<h2 class="anchored" data-anchor-id="export-datasets-as-csv-and-rds">8. Export datasets as CSV and RDS</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export as CSV</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(weather_data_clean, <span class="st">"weather_data_clean.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Export as RDS</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(weather_data_clean, <span class="st">"weather_data_clean.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="check-for-duplicates-and-missing-values" class="level2">
-<h2 class="anchored" data-anchor-id="check-for-duplicates-and-missing-values">7. Check for Duplicates and Missing Values</h2>
+<h2 class="anchored" data-anchor-id="check-for-duplicates-and-missing-values">9. Check for Duplicates and Missing Values</h2>
 <p>Ensure data integrity by checking for duplicates and missing values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, naniar)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>weather_data <span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"data/weather_data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, naniar, lubridate)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>weather_data <span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"data/weather_data_clean.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 34124 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr (12): Region, Station, Date, Daily Rainfall Total (mm), Highest 30 min R...
-dbl  (2): Latitude, Longitude
+chr   (2): Region, Station
+dbl  (11): Daily Rainfall Total (mm), Highest 30 min Rainfall (mm), Highest ...
+date  (1): Date
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> weather_data <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">duplicated</span>(.))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(duplicates)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> weather_data <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">duplicated</span>(.))</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(duplicates)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 0 × 14
-# ℹ 14 variables: Region &lt;chr&gt;, Station &lt;chr&gt;, Date &lt;chr&gt;,
-#   Daily Rainfall Total (mm) &lt;chr&gt;, Highest 30 min Rainfall (mm) &lt;chr&gt;,
-#   Highest 60 min Rainfall (mm) &lt;chr&gt;, Highest 120 min Rainfall (mm) &lt;chr&gt;,
-#   Mean Temperature (°C) &lt;chr&gt;, Maximum Temperature (°C) &lt;chr&gt;,
-#   Minimum Temperature (°C) &lt;chr&gt;, Mean Wind Speed (km/h) &lt;chr&gt;,
-#   Max Wind Speed (km/h) &lt;chr&gt;, Latitude &lt;dbl&gt;, Longitude &lt;dbl&gt;</code></pre>
+# ℹ 14 variables: Region &lt;chr&gt;, Station &lt;chr&gt;, Date &lt;date&gt;,
+#   Daily Rainfall Total (mm) &lt;dbl&gt;, Highest 30 min Rainfall (mm) &lt;dbl&gt;,
+#   Highest 60 min Rainfall (mm) &lt;dbl&gt;, Highest 120 min Rainfall (mm) &lt;dbl&gt;,
+#   Mean Temperature (°C) &lt;dbl&gt;, Maximum Temperature (°C) &lt;dbl&gt;,
+#   Minimum Temperature (°C) &lt;dbl&gt;, Mean Wind Speed (km/h) &lt;dbl&gt;,
+#   Max Wind Speed (km/h) &lt;dbl&gt;, Latitude &lt;dbl&gt;, Longitude &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(weather_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(weather_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
