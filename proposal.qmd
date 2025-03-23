@@ -32,7 +32,7 @@ Singapore’s National Environment Agency provides access to historical weather 
 
     -   **Temperature and Rainfall Data**: Recorded at 19 weather stations across Singapore.
 
-    -   **Time Span**: 5 years (2019-2024), providing a rich dataset to analyze weather trends and variations.
+    -   **Time Span**: 5 years (2020-2024), providing a rich dataset to analyze weather trends and variations.
 
     -   **Data Frequency**: Daily records capturing temperature highs/lows and total rainfall.
 
@@ -45,8 +45,8 @@ Singapore’s National Environment Agency provides access to historical weather 
     -   **Source**: Data retrieved from [Weather.gov.sg](https://www.weather.gov.sg/climate-historical-daily/), ensuring credibility and consistency with Singapore’s official climate records.
 
     | Dataset | Frequency | Period | Source |
-    |----|----|----|----|
-    | Climate Historical Daily Records (rainfall, temperature) | Daily | 2019-2024 | <https://www.weather.gov.sg/climate-historical-daily/> |
+    |------------------|------------------|------------------|------------------|
+    | Climate Historical Daily Records (rainfall, temperature) | Daily | 2020-2024 | <https://www.weather.gov.sg/climate-historical-daily/> |
 
 ## **5. Approach and Methodology**
 

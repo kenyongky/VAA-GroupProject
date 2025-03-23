@@ -17,6 +17,8 @@ website:
         menu:
         - href: data_prep.qmd
           text: Data Preparation
+        - href: "https://isss608-kenyongky.netlify.app/take-home_ex/take-home_ex03/take-home_ex03"
+          text: Geospatial Analytics
       - about.qmd
     
 
