@@ -187,7 +187,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#convert-column-data-type" id="toc-convert-column-data-type" class="nav-link" data-scroll-target="#convert-column-data-type">7. Convert column data type</a></li>
   <li><a href="#export-datasets-as-csv-and-rds" id="toc-export-datasets-as-csv-and-rds" class="nav-link" data-scroll-target="#export-datasets-as-csv-and-rds">8. Export datasets as CSV and RDS</a></li>
   <li><a href="#check-for-duplicates-and-missing-values" id="toc-check-for-duplicates-and-missing-values" class="nav-link" data-scroll-target="#check-for-duplicates-and-missing-values">9. Check for Duplicates and Missing Values</a></li>
-  <li><a href="#a-glimpse-at-the-dataset" id="toc-a-glimpse-at-the-dataset" class="nav-link" data-scroll-target="#a-glimpse-at-the-dataset">10. A glimpse at the dataset</a></li>
+  <li><a href="#remove-unused-columns" id="toc-remove-unused-columns" class="nav-link" data-scroll-target="#remove-unused-columns">10. Remove unused columns</a></li>
+  <li><a href="#impute-missing-values" id="toc-impute-missing-values" class="nav-link" data-scroll-target="#impute-missing-values">11. Impute missing values</a></li>
+  <li><a href="#export-prepared-datasets-as-csv-and-rds" id="toc-export-prepared-datasets-as-csv-and-rds" class="nav-link" data-scroll-target="#export-prepared-datasets-as-csv-and-rds">12. Export prepared datasets as CSV and RDS</a></li>
   </ul>
 </nav>
     </div>
@@ -317,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="check-for-duplicates-and-missing-values">9. Check for Duplicates and Missing Values</h2>
 <p>Ensure data integrity by checking for duplicates and missing values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, naniar, lubridate)</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, naniar, lubridate, imputeTS)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>weather_data_updated <span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"data/weather_data_updated.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -354,28 +356,70 @@ date  (1): Date
 </div>
 </div>
 </section>
-<section id="a-glimpse-at-the-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="a-glimpse-at-the-dataset">10. A glimpse at the dataset</h2>
+<section id="remove-unused-columns" class="level2">
+<h2 class="anchored" data-anchor-id="remove-unused-columns">10. Remove unused columns</h2>
+<p>We remove the columns that we will not used: Highest 30 min Rainfall (mm), Highest 60 min Rainfall (mm), Highest 120 min Rainfall (mm), Mean Wind Speed (km/h) and Max Wind Speed (km/h).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(weather_data_updated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>weather_data_updated <span class="ot">&lt;-</span> weather_data_updated[, <span class="sc">!</span>(<span class="fu">names</span>(weather_data_updated) <span class="sc">%in%</span> <span class="fu">c</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Highest 30 min Rainfall (mm)"</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Highest 60 min Rainfall (mm)"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Highest 120 min Rainfall (mm)"</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Mean Wind Speed (km/h)"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Max Wind Speed (km/h)"</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="impute-missing-values" class="level2">
+<h2 class="anchored" data-anchor-id="impute-missing-values">11. Impute missing values</h2>
+<p>This code fills in missing weather data using a 7-day moving average, doing so separately for each weather station.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>weather_variables <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Daily Rainfall Total (mm)"</span>, <span class="st">"Mean Temperature (°C)"</span>, <span class="st">"Maximum Temperature (°C)"</span>, <span class="st">"Minimum Temperature (°C)"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>weather_data_cleaned <span class="ot">&lt;-</span> weather_data_updated</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(variable <span class="cf">in</span> weather_variables) {</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  weather_data_cleaned[[variable]] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(weather_data_cleaned[[variable]]))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  weather_data_cleaned <span class="ot">&lt;-</span> weather_data_cleaned <span class="sc">%&gt;%</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Station) <span class="sc">%&gt;%</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">arrange</span>(Station, Date) <span class="sc">%&gt;%</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="st">"{variable}"</span> <span class="sc">:</span><span class="er">=</span> <span class="fu">round</span>(<span class="fu">na_ma</span>(.data[[variable]], <span class="at">k =</span> <span class="dv">7</span>, <span class="at">weighting =</span> <span class="st">"simple"</span>), <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(weather_data_cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 30,532
-Columns: 14
-$ Region                          &lt;chr&gt; "North", "North", "North", "North", "N…
-$ Station                         &lt;chr&gt; "Admiralty", "Admiralty", "Admiralty",…
-$ Date                            &lt;date&gt; 2020-01-01, 2020-01-02, 2020-01-03, 2…
-$ `Daily Rainfall Total (mm)`     &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 8.6, 10.0, 5.6, 1.…
-$ `Highest 30 min Rainfall (mm)`  &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 2.6, 4.8, 5.6, 0.4…
-$ `Highest 60 min Rainfall (mm)`  &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 4.4, NA, 5.6, 0.6,…
-$ `Highest 120 min Rainfall (mm)` &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 8.6, NA, 5.6, 0.8,…
-$ `Mean Temperature (°C)`         &lt;dbl&gt; 27.5, 27.7, 27.9, 29.2, 26.3, 26.4, 28…
-$ `Maximum Temperature (°C)`      &lt;dbl&gt; 31.1, 30.7, 32.7, 35.7, 30.4, 30.4, 32…
-$ `Minimum Temperature (°C)`      &lt;dbl&gt; 25.4, 25.9, 24.8, 26.0, 24.7, 24.2, 24…
-$ `Mean Wind Speed (km/h)`        &lt;dbl&gt; 22.0, 24.5, 20.2, 13.7, 9.7, 11.1, 8.2…
-$ `Max Wind Speed (km/h)`         &lt;dbl&gt; 56.5, 60.5, 51.1, 34.6, 41.5, 38.9, 34…
-$ Latitude                        &lt;dbl&gt; 1.4439, 1.4439, 1.4439, 1.4439, 1.4439…
-$ Longitude                       &lt;dbl&gt; 103.7854, 103.7854, 103.7854, 103.7854…</code></pre>
+Columns: 9
+$ Region                      &lt;chr&gt; "North", "North", "North", "North", "North…
+$ Station                     &lt;chr&gt; "Admiralty", "Admiralty", "Admiralty", "Ad…
+$ Date                        &lt;date&gt; 2020-01-01, 2020-01-02, 2020-01-03, 2020-…
+$ `Daily Rainfall Total (mm)` &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 8.6, 10.0, 5.6, 1.0, 1…
+$ `Mean Temperature (°C)`     &lt;dbl&gt; 27.5, 27.7, 27.9, 29.2, 26.3, 26.4, 28.7, …
+$ `Maximum Temperature (°C)`  &lt;dbl&gt; 31.1, 30.7, 32.7, 35.7, 30.4, 30.4, 32.3, …
+$ `Minimum Temperature (°C)`  &lt;dbl&gt; 25.4, 25.9, 24.8, 26.0, 24.7, 24.2, 24.6, …
+$ Latitude                    &lt;dbl&gt; 1.4439, 1.4439, 1.4439, 1.4439, 1.4439, 1.…
+$ Longitude                   &lt;dbl&gt; 103.7854, 103.7854, 103.7854, 103.7854, 10…</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(weather_data_cleaned)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="data_prep_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="export-prepared-datasets-as-csv-and-rds" class="level2">
+<h2 class="anchored" data-anchor-id="export-prepared-datasets-as-csv-and-rds">12. Export prepared datasets as CSV and RDS</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export as CSV</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(weather_data_cleaned, <span class="st">"weather_data_cleaned.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Export as RDS</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(weather_data_cleaned, <span class="st">"weather_data_cleaned.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

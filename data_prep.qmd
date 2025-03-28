@@ -122,7 +122,7 @@ saveRDS(weather_data_updated, "weather_data_updated.rds")
 Ensure data integrity by checking for duplicates and missing values.
 
 ```{r}
-pacman::p_load(tidyverse, naniar, lubridate)
+pacman::p_load(tidyverse, naniar, lubridate, imputeTS)
 
 weather_data_updated <-read_csv("data/weather_data_updated.csv")
 
@@ -133,8 +133,51 @@ print(duplicates)
 vis_miss(weather_data_updated)
 ```
 
-## 10. A glimpse at the dataset
+## 10. Remove unused columns
+
+We remove the columns that we will not used: Highest 30 min Rainfall (mm), Highest 60 min Rainfall (mm), Highest 120 min Rainfall (mm), Mean Wind Speed (km/h) and Max Wind Speed (km/h).
 
 ```{r}
-glimpse(weather_data_updated)
+weather_data_updated <- weather_data_updated[, !(names(weather_data_updated) %in% c(
+  "Highest 30 min Rainfall (mm)",
+  "Highest 60 min Rainfall (mm)",
+  "Highest 120 min Rainfall (mm)",
+  "Mean Wind Speed (km/h)",
+  "Max Wind Speed (km/h)"
+))]
+```
+
+## 11. Impute missing values
+
+This code fills in missing weather data using a 7-day moving average, doing so separately for each weather station.
+
+```{r}
+weather_variables <- c("Daily Rainfall Total (mm)", "Mean Temperature (°C)", "Maximum Temperature (°C)", "Minimum Temperature (°C)")
+
+weather_data_cleaned <- weather_data_updated
+
+for(variable in weather_variables) {
+  weather_data_cleaned[[variable]] <- as.numeric(as.character(weather_data_cleaned[[variable]]))
+  
+  weather_data_cleaned <- weather_data_cleaned %>%
+    group_by(Station) %>%
+    arrange(Station, Date) %>%
+    mutate("{variable}" := round(na_ma(.data[[variable]], k = 7, weighting = "simple"), 1)) %>%
+    ungroup()
+}
+```
+
+```{r}
+glimpse(weather_data_cleaned)
+vis_miss(weather_data_cleaned)
+```
+
+## 12. Export prepared datasets as CSV and RDS
+
+```{r}
+# Export as CSV
+write.csv(weather_data_cleaned, "weather_data_cleaned.csv", row.names = FALSE)
+
+# Export as RDS
+saveRDS(weather_data_cleaned, "weather_data_cleaned.rds")
 ```
