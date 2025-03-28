@@ -151,6 +151,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./data_prep.html">
  <span class="dropdown-text">Data Preparation</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="https://isss608-kenyongky.netlify.app/take-home_ex/take-home_ex03/take-home_ex03">
+ <span class="dropdown-text">Geospatial Analytics</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -221,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="download-historical-weather-data" class="level2">
 <h2 class="anchored" data-anchor-id="download-historical-weather-data">1. Download Historical Weather Data</h2>
-<p>Download the daily weather data for each year from the <a href="https://www.weather.gov.sg/climate-historical-daily/">Meteorological Service Singapore</a> website. Save all the CSV files into a single folder.</p>
+<p>Downloaded the daily weather data for each year from the <a href="https://www.weather.gov.sg/climate-historical-daily/">Meteorological Service Singapore</a> website. Only <a href="https://www.weather.gov.sg/wp-content/uploads/2024/08/Station_Records.pdf">active full aws stations</a> were considered. While we were downloading the datasets, Marina Barrage, Semakau Island and Tengah stations were observed to contain a significant amount of missing data (2 years worth of missing data). Therefore, these stations were omitted. The downloaded CSV files were placed into a single folder.</p>
 </section>
 <section id="combine-all-csv-files-into-one-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="combine-all-csv-files-into-one-dataset">2. Combine All CSV Files into One Dataset</h2>
@@ -235,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="convert-year-month-day-to-a-single-date-column" class="level2">
 <h2 class="anchored" data-anchor-id="convert-year-month-day-to-a-single-date-column">3. Convert Year, Month, Day to a Single Date Column</h2>
-<p>Assuming each CSV file includes columns for <code>Year</code>, <code>Month</code>, and <code>Day</code>:</p>
+<p>Since each CSV file includes columns for <code>Year</code>, <code>Month</code>, and <code>Day</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine year, month, and day into a proper date</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>weather_data[, Date <span class="sc">:</span><span class="er">=</span> <span class="fu">as.Date</span>(<span class="fu">paste</span>(Year, Month, Day, <span class="at">sep =</span> <span class="st">"-"</span>))]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -246,7 +250,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="add-region-column">4. Add Region Column</h2>
 <p>We map the region using a predefined vector based on the station name.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>region_map <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Admiralty"</span> <span class="ot">=</span> <span class="st">"North"</span>,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Admiralty"</span> <span class="ot">=</span> <span class="st">"North"</span>, </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Ang Mo Kio"</span> <span class="ot">=</span> <span class="st">"Northeast"</span>,</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Changi"</span> <span class="ot">=</span> <span class="st">"East"</span>,</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Choa Chu Kang (South)"</span> <span class="ot">=</span> <span class="st">"West"</span>,</span>
@@ -254,20 +258,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"East Coast Parkway"</span> <span class="ot">=</span> <span class="st">"East"</span>,</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Jurong (West)"</span> <span class="ot">=</span> <span class="st">"West"</span>,</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Jurong Island"</span> <span class="ot">=</span> <span class="st">"West"</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Marina Barrage"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Newton"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pasir Panjang"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Paya Lebar"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pulau Ubin"</span> <span class="ot">=</span> <span class="st">"Northeast"</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Seletar"</span> <span class="ot">=</span> <span class="st">"North"</span>,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sembawang"</span> <span class="ot">=</span> <span class="st">"North"</span>,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sentosa Island"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tai Seng"</span> <span class="ot">=</span> <span class="st">"Northeast"</span>,</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tengah"</span> <span class="ot">=</span> <span class="st">"West"</span>,</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tuas South"</span> <span class="ot">=</span> <span class="st">"West"</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>weather_data[, Region <span class="sc">:</span><span class="er">=</span> region_map[Station]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Newton"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pasir Panjang"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Paya Lebar"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Pulau Ubin"</span> <span class="ot">=</span> <span class="st">"Northeast"</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Seletar"</span> <span class="ot">=</span> <span class="st">"North"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sembawang"</span> <span class="ot">=</span> <span class="st">"North"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sentosa Island"</span> <span class="ot">=</span> <span class="st">"Central"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tai Seng"</span> <span class="ot">=</span> <span class="st">"Northeast"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Tuas South"</span> <span class="ot">=</span> <span class="st">"West"</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>weather_data[, Region <span class="sc">:</span><span class="er">=</span> region_map[Station]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="add-latitude-and-longitude" class="level2">
 <h2 class="anchored" data-anchor-id="add-latitude-and-longitude">5. Add Latitude and Longitude</h2>
@@ -276,10 +278,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Station =</span> <span class="fu">c</span>(<span class="st">"Admiralty"</span>, <span class="st">"Ang Mo Kio"</span>, <span class="st">"Changi"</span>, <span class="st">"Choa Chu Kang (South)"</span>, <span class="st">"Clementi"</span>, <span class="st">"East Coast Parkway"</span>, </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Jurong (West)"</span>, <span class="st">"Jurong Island"</span>, <span class="st">"Marina Barrage"</span>, <span class="st">"Newton"</span>, <span class="st">"Pasir Panjang"</span>, <span class="st">"Paya Lebar"</span>, </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Pulau Ubin"</span>, <span class="st">"Seletar"</span>, <span class="st">"Sembawang"</span>, <span class="st">"Sentosa Island"</span>, <span class="st">"Tai Seng"</span>, <span class="st">"Tengah"</span>, <span class="st">"Tuas South"</span>),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Latitude =</span> <span class="fu">c</span>(<span class="fl">1.4439</span>, <span class="fl">1.3793</span>, <span class="fl">1.3678</span>, <span class="fl">1.3729</span>, <span class="fl">1.3318</span>, <span class="fl">1.3133</span>, <span class="fl">1.3458</span>, <span class="fl">1.2542</span>, <span class="fl">1.2799</span>, <span class="fl">1.3106</span>, <span class="fl">1.2824</span>, </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>               <span class="fl">1.3571</span>, <span class="fl">1.4168</span>, <span class="fl">1.4167</span>, <span class="fl">1.4250</span>, <span class="fl">1.2503</span>, <span class="fl">1.3406</span>, <span class="fl">1.3858</span>, <span class="fl">1.2938</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Latitude =</span> <span class="fu">c</span>(<span class="fl">1.4439</span>, <span class="fl">1.3793</span>, <span class="fl">1.3678</span>, <span class="fl">1.3729</span>, <span class="fl">1.3318</span>, <span class="fl">1.3133</span>, <span class="fl">1.3458</span>, <span class="fl">1.2542</span>, <span class="fl">1.2799</span>, <span class="fl">1.2824</span>, </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>               <span class="fl">1.3571</span>, <span class="fl">1.4168</span>, <span class="fl">1.4167</span>, <span class="fl">1.4250</span>, <span class="fl">1.2503</span>, <span class="fl">1.3406</span>, <span class="fl">1.2938</span>),</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Longitude =</span> <span class="fu">c</span>(<span class="fl">103.7854</span>, <span class="fl">103.8500</span>, <span class="fl">103.9823</span>, <span class="fl">103.7224</span>, <span class="fl">103.7762</span>, <span class="fl">103.9620</span>, <span class="fl">103.6817</span>, <span class="fl">103.6741</span>, <span class="fl">103.8703</span>, </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                <span class="fl">103.8365</span>, <span class="fl">103.7545</span>, <span class="fl">103.9037</span>, <span class="fl">103.9673</span>, <span class="fl">103.8650</span>, <span class="fl">103.8200</span>, <span class="fl">103.8275</span>, <span class="fl">103.8882</span>, <span class="fl">103.7119</span>, </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                 <span class="fl">103.7545</span>, <span class="fl">103.9037</span>, <span class="fl">103.9673</span>, <span class="fl">103.8650</span>, <span class="fl">103.8200</span>, <span class="fl">103.8275</span>, <span class="fl">103.8882</span>, </span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                <span class="fl">103.6184</span>)</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
@@ -294,7 +296,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="convert-column-data-type" class="level2">
 <h2 class="anchored" data-anchor-id="convert-column-data-type">7. Convert column data type</h2>
 <p>Convert data types such that ‘Region’ and ‘Station’ remain as character, ‘Date’ becomes a proper date type and all other columns become numeric.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>weather_data_clean <span class="ot">&lt;-</span> weather_data <span class="sc">%&gt;%</span></span>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>weather_data_updated <span class="ot">&lt;-</span> weather_data <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Date =</span> <span class="fu">dmy</span>(Date),  <span class="co"># Convert Date column to Date format (from d/m/yyyy)</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
@@ -306,10 +308,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="export-datasets-as-csv-and-rds" class="level2">
 <h2 class="anchored" data-anchor-id="export-datasets-as-csv-and-rds">8. Export datasets as CSV and RDS</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Export as CSV</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(weather_data_clean, <span class="st">"weather_data_clean.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(weather_data_updated, <span class="st">"weather_data_updated.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Export as RDS</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(weather_data_clean, <span class="st">"weather_data_clean.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(weather_data_updated, <span class="st">"weather_data_updated.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="check-for-duplicates-and-missing-values" class="level2">
 <h2 class="anchored" data-anchor-id="check-for-duplicates-and-missing-values">9. Check for Duplicates and Missing Values</h2>
@@ -317,9 +319,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(tidyverse, naniar, lubridate)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>weather_data_clean <span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"data/weather_data_clean.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>weather_data_updated <span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"data/weather_data_updated.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 34124 Columns: 14
+<pre><code>Rows: 30532 Columns: 14
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
 chr   (2): Region, Station
@@ -329,7 +331,7 @@ date  (1): Date
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> weather_data_clean <span class="sc">%&gt;%</span> </span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>duplicates <span class="ot">&lt;-</span> weather_data_updated <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">duplicated</span>(.))</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(duplicates)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -342,7 +344,7 @@ date  (1): Date
 #   Minimum Temperature (°C) &lt;dbl&gt;, Mean Wind Speed (km/h) &lt;dbl&gt;,
 #   Max Wind Speed (km/h) &lt;dbl&gt;, Latitude &lt;dbl&gt;, Longitude &lt;dbl&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(weather_data_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(weather_data_updated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -355,9 +357,9 @@ date  (1): Date
 <section id="a-glimpse-at-the-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="a-glimpse-at-the-dataset">10. A glimpse at the dataset</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(weather_data_clean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(weather_data_updated)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 34,124
+<pre><code>Rows: 30,532
 Columns: 14
 $ Region                          &lt;chr&gt; "North", "North", "North", "North", "N…
 $ Station                         &lt;chr&gt; "Admiralty", "Admiralty", "Admiralty",…

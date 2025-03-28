@@ -102,7 +102,7 @@
     "href": "data_prep.html#download-historical-weather-data",
     "title": "Data Preparation",
     "section": "1. Download Historical Weather Data",
-    "text": "1. Download Historical Weather Data\nDownload the daily weather data for each year from the Meteorological Service Singapore website. Save all the CSV files into a single folder."
+    "text": "1. Download Historical Weather Data\nDownloaded the daily weather data for each year from the Meteorological Service Singapore website. Only active full aws stations were considered. While we were downloading the datasets, Marina Barrage, Semakau Island and Tengah stations were observed to contain a significant amount of missing data (2 years worth of missing data). Therefore, these stations were omitted. The downloaded CSV files were placed into a single folder."
   },
   {
     "objectID": "data_prep.html#combine-all-csv-files-into-one-dataset",
@@ -116,21 +116,21 @@
     "href": "data_prep.html#convert-year-month-day-to-a-single-date-column",
     "title": "Data Preparation",
     "section": "3. Convert Year, Month, Day to a Single Date Column",
-    "text": "3. Convert Year, Month, Day to a Single Date Column\nAssuming each CSV file includes columns for Year, Month, and Day:\n# Combine year, month, and day into a proper date\nweather_data[, Date := as.Date(paste(Year, Month, Day, sep = \"-\"))]\n\n# Remove the original columns\nweather_data[, c(\"Year\", \"Month\", \"Day\") := NULL]"
+    "text": "3. Convert Year, Month, Day to a Single Date Column\nSince each CSV file includes columns for Year, Month, and Day:\n# Combine year, month, and day into a proper date\nweather_data[, Date := as.Date(paste(Year, Month, Day, sep = \"-\"))]\n\n# Remove the original columns\nweather_data[, c(\"Year\", \"Month\", \"Day\") := NULL]"
   },
   {
     "objectID": "data_prep.html#add-region-column",
     "href": "data_prep.html#add-region-column",
     "title": "Data Preparation",
     "section": "4. Add Region Column",
-    "text": "4. Add Region Column\nWe map the region using a predefined vector based on the station name.\nregion_map &lt;- c(\n  \"Admiralty\" = \"North\",\n  \"Ang Mo Kio\" = \"Northeast\",\n  \"Changi\" = \"East\",\n  \"Choa Chu Kang (South)\" = \"West\",\n  \"Clementi\" = \"West\",\n  \"East Coast Parkway\" = \"East\",\n  \"Jurong (West)\" = \"West\",\n  \"Jurong Island\" = \"West\",\n  \"Marina Barrage\" = \"Central\",\n  \"Newton\" = \"Central\",\n  \"Pasir Panjang\" = \"Central\",\n  \"Paya Lebar\" = \"Central\",\n  \"Pulau Ubin\" = \"Northeast\",\n  \"Seletar\" = \"North\",\n  \"Sembawang\" = \"North\",\n  \"Sentosa Island\" = \"Central\",\n  \"Tai Seng\" = \"Northeast\",\n  \"Tengah\" = \"West\",\n  \"Tuas South\" = \"West\"\n)\n\nweather_data[, Region := region_map[Station]]"
+    "text": "4. Add Region Column\nWe map the region using a predefined vector based on the station name.\nregion_map &lt;- c(\n  \"Admiralty\" = \"North\", \n  \"Ang Mo Kio\" = \"Northeast\",\n  \"Changi\" = \"East\",\n  \"Choa Chu Kang (South)\" = \"West\",\n  \"Clementi\" = \"West\",\n  \"East Coast Parkway\" = \"East\",\n  \"Jurong (West)\" = \"West\",\n  \"Jurong Island\" = \"West\",\n  \"Newton\" = \"Central\",\n  \"Pasir Panjang\" = \"Central\",\n  \"Paya Lebar\" = \"Central\",\n  \"Pulau Ubin\" = \"Northeast\",\n  \"Seletar\" = \"North\",\n  \"Sembawang\" = \"North\",\n  \"Sentosa Island\" = \"Central\",\n  \"Tai Seng\" = \"Northeast\",\n  \"Tuas South\" = \"West\"\n)\n\nweather_data[, Region := region_map[Station]]"
   },
   {
     "objectID": "data_prep.html#add-latitude-and-longitude",
     "href": "data_prep.html#add-latitude-and-longitude",
     "title": "Data Preparation",
     "section": "5. Add Latitude and Longitude",
-    "text": "5. Add Latitude and Longitude\nWe join latitude and longitude coordinates using a reference table.\ndata_coords &lt;- data.table(\n  Station = c(\"Admiralty\", \"Ang Mo Kio\", \"Changi\", \"Choa Chu Kang (South)\", \"Clementi\", \"East Coast Parkway\", \n              \"Jurong (West)\", \"Jurong Island\", \"Marina Barrage\", \"Newton\", \"Pasir Panjang\", \"Paya Lebar\", \n              \"Pulau Ubin\", \"Seletar\", \"Sembawang\", \"Sentosa Island\", \"Tai Seng\", \"Tengah\", \"Tuas South\"),\n  Latitude = c(1.4439, 1.3793, 1.3678, 1.3729, 1.3318, 1.3133, 1.3458, 1.2542, 1.2799, 1.3106, 1.2824, \n               1.3571, 1.4168, 1.4167, 1.4250, 1.2503, 1.3406, 1.3858, 1.2938),\n  Longitude = c(103.7854, 103.8500, 103.9823, 103.7224, 103.7762, 103.9620, 103.6817, 103.6741, 103.8703, \n                103.8365, 103.7545, 103.9037, 103.9673, 103.8650, 103.8200, 103.8275, 103.8882, 103.7119, \n                103.6184)\n)\n\nweather_data &lt;- merge(weather_data, data_coords, by = \"Station\", all.x = TRUE)"
+    "text": "5. Add Latitude and Longitude\nWe join latitude and longitude coordinates using a reference table.\ndata_coords &lt;- data.table(\n  Station = c(\"Admiralty\", \"Ang Mo Kio\", \"Changi\", \"Choa Chu Kang (South)\", \"Clementi\", \"East Coast Parkway\", \n              \"Jurong (West)\", \"Jurong Island\", \"Marina Barrage\", \"Newton\", \"Pasir Panjang\", \"Paya Lebar\", \n              \"Pulau Ubin\", \"Seletar\", \"Sembawang\", \"Sentosa Island\", \"Tai Seng\", \"Tengah\", \"Tuas South\"),\n  Latitude = c(1.4439, 1.3793, 1.3678, 1.3729, 1.3318, 1.3133, 1.3458, 1.2542, 1.2799, 1.2824, \n               1.3571, 1.4168, 1.4167, 1.4250, 1.2503, 1.3406, 1.2938),\n  Longitude = c(103.7854, 103.8500, 103.9823, 103.7224, 103.7762, 103.9620, 103.6817, 103.6741, 103.8703, \n                 103.7545, 103.9037, 103.9673, 103.8650, 103.8200, 103.8275, 103.8882, \n                103.6184)\n)\n\nweather_data &lt;- merge(weather_data, data_coords, by = \"Station\", all.x = TRUE)"
   },
   {
     "objectID": "data_prep.html#sort-data",
@@ -144,21 +144,21 @@
     "href": "data_prep.html#check-for-duplicates-and-missing-values",
     "title": "Data Preparation",
     "section": "9. Check for Duplicates and Missing Values",
-    "text": "9. Check for Duplicates and Missing Values\nEnsure data integrity by checking for duplicates and missing values.\n\npacman::p_load(tidyverse, naniar, lubridate)\n\nweather_data_clean &lt;-read_csv(\"data/weather_data_clean.csv\")\n\nRows: 34124 Columns: 14\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr   (2): Region, Station\ndbl  (11): Daily Rainfall Total (mm), Highest 30 min Rainfall (mm), Highest ...\ndate  (1): Date\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nduplicates &lt;- weather_data_clean %&gt;% \n  filter(duplicated(.))\n\nprint(duplicates)\n\n# A tibble: 0 × 14\n# ℹ 14 variables: Region &lt;chr&gt;, Station &lt;chr&gt;, Date &lt;date&gt;,\n#   Daily Rainfall Total (mm) &lt;dbl&gt;, Highest 30 min Rainfall (mm) &lt;dbl&gt;,\n#   Highest 60 min Rainfall (mm) &lt;dbl&gt;, Highest 120 min Rainfall (mm) &lt;dbl&gt;,\n#   Mean Temperature (°C) &lt;dbl&gt;, Maximum Temperature (°C) &lt;dbl&gt;,\n#   Minimum Temperature (°C) &lt;dbl&gt;, Mean Wind Speed (km/h) &lt;dbl&gt;,\n#   Max Wind Speed (km/h) &lt;dbl&gt;, Latitude &lt;dbl&gt;, Longitude &lt;dbl&gt;\n\nvis_miss(weather_data_clean)"
+    "text": "9. Check for Duplicates and Missing Values\nEnsure data integrity by checking for duplicates and missing values.\n\npacman::p_load(tidyverse, naniar, lubridate)\n\nweather_data_updated &lt;-read_csv(\"data/weather_data_updated.csv\")\n\nRows: 30532 Columns: 14\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr   (2): Region, Station\ndbl  (11): Daily Rainfall Total (mm), Highest 30 min Rainfall (mm), Highest ...\ndate  (1): Date\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nduplicates &lt;- weather_data_updated %&gt;% \n  filter(duplicated(.))\n\nprint(duplicates)\n\n# A tibble: 0 × 14\n# ℹ 14 variables: Region &lt;chr&gt;, Station &lt;chr&gt;, Date &lt;date&gt;,\n#   Daily Rainfall Total (mm) &lt;dbl&gt;, Highest 30 min Rainfall (mm) &lt;dbl&gt;,\n#   Highest 60 min Rainfall (mm) &lt;dbl&gt;, Highest 120 min Rainfall (mm) &lt;dbl&gt;,\n#   Mean Temperature (°C) &lt;dbl&gt;, Maximum Temperature (°C) &lt;dbl&gt;,\n#   Minimum Temperature (°C) &lt;dbl&gt;, Mean Wind Speed (km/h) &lt;dbl&gt;,\n#   Max Wind Speed (km/h) &lt;dbl&gt;, Latitude &lt;dbl&gt;, Longitude &lt;dbl&gt;\n\nvis_miss(weather_data_updated)"
   },
   {
     "objectID": "data_prep.html#convert-column-data-type",
     "href": "data_prep.html#convert-column-data-type",
     "title": "Data Preparation",
     "section": "7. Convert column data type",
-    "text": "7. Convert column data type\nConvert data types such that ‘Region’ and ‘Station’ remain as character, ‘Date’ becomes a proper date type and all other columns become numeric.\nweather_data_clean &lt;- weather_data %&gt;%\n  mutate(\n    Date = dmy(Date),  # Convert Date column to Date format (from d/m/yyyy)\n    across(\n      .cols = -c(Region, Station, Date),  # Select all except these columns\n      .fns = ~ as.numeric(.)\n    )\n  )"
+    "text": "7. Convert column data type\nConvert data types such that ‘Region’ and ‘Station’ remain as character, ‘Date’ becomes a proper date type and all other columns become numeric.\nweather_data_updated &lt;- weather_data %&gt;%\n  mutate(\n    Date = dmy(Date),  # Convert Date column to Date format (from d/m/yyyy)\n    across(\n      .cols = -c(Region, Station, Date),  # Select all except these columns\n      .fns = ~ as.numeric(.)\n    )\n  )"
   },
   {
     "objectID": "data_prep.html#export-datasets-as-csv-and-rds",
     "href": "data_prep.html#export-datasets-as-csv-and-rds",
     "title": "Data Preparation",
     "section": "8. Export datasets as CSV and RDS",
-    "text": "8. Export datasets as CSV and RDS\n# Export as CSV\nwrite.csv(weather_data_clean, \"weather_data_clean.csv\", row.names = FALSE)\n\n# Export as RDS\nsaveRDS(weather_data_clean, \"weather_data_clean.rds\")"
+    "text": "8. Export datasets as CSV and RDS\n# Export as CSV\nwrite.csv(weather_data_updated, \"weather_data_updated.csv\", row.names = FALSE)\n\n# Export as RDS\nsaveRDS(weather_data_updated, \"weather_data_updated.rds\")"
   },
   {
     "objectID": "data_prep.html#check-data-structure",
@@ -179,6 +179,6 @@
     "href": "data_prep.html#a-glimpse-at-the-dataset",
     "title": "Data Preparation",
     "section": "10. A glimpse at the dataset",
-    "text": "10. A glimpse at the dataset\n\nglimpse(weather_data_clean)\n\nRows: 34,124\nColumns: 14\n$ Region                          &lt;chr&gt; \"North\", \"North\", \"North\", \"North\", \"N…\n$ Station                         &lt;chr&gt; \"Admiralty\", \"Admiralty\", \"Admiralty\",…\n$ Date                            &lt;date&gt; 2020-01-01, 2020-01-02, 2020-01-03, 2…\n$ `Daily Rainfall Total (mm)`     &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 8.6, 10.0, 5.6, 1.…\n$ `Highest 30 min Rainfall (mm)`  &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 2.6, 4.8, 5.6, 0.4…\n$ `Highest 60 min Rainfall (mm)`  &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 4.4, NA, 5.6, 0.6,…\n$ `Highest 120 min Rainfall (mm)` &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 8.6, NA, 5.6, 0.8,…\n$ `Mean Temperature (°C)`         &lt;dbl&gt; 27.5, 27.7, 27.9, 29.2, 26.3, 26.4, 28…\n$ `Maximum Temperature (°C)`      &lt;dbl&gt; 31.1, 30.7, 32.7, 35.7, 30.4, 30.4, 32…\n$ `Minimum Temperature (°C)`      &lt;dbl&gt; 25.4, 25.9, 24.8, 26.0, 24.7, 24.2, 24…\n$ `Mean Wind Speed (km/h)`        &lt;dbl&gt; 22.0, 24.5, 20.2, 13.7, 9.7, 11.1, 8.2…\n$ `Max Wind Speed (km/h)`         &lt;dbl&gt; 56.5, 60.5, 51.1, 34.6, 41.5, 38.9, 34…\n$ Latitude                        &lt;dbl&gt; 1.4439, 1.4439, 1.4439, 1.4439, 1.4439…\n$ Longitude                       &lt;dbl&gt; 103.7854, 103.7854, 103.7854, 103.7854…"
+    "text": "10. A glimpse at the dataset\n\nglimpse(weather_data_updated)\n\nRows: 30,532\nColumns: 14\n$ Region                          &lt;chr&gt; \"North\", \"North\", \"North\", \"North\", \"N…\n$ Station                         &lt;chr&gt; \"Admiralty\", \"Admiralty\", \"Admiralty\",…\n$ Date                            &lt;date&gt; 2020-01-01, 2020-01-02, 2020-01-03, 2…\n$ `Daily Rainfall Total (mm)`     &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 8.6, 10.0, 5.6, 1.…\n$ `Highest 30 min Rainfall (mm)`  &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 2.6, 4.8, 5.6, 0.4…\n$ `Highest 60 min Rainfall (mm)`  &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 4.4, NA, 5.6, 0.6,…\n$ `Highest 120 min Rainfall (mm)` &lt;dbl&gt; 0.0, 0.0, 0.0, 0.4, 8.6, NA, 5.6, 0.8,…\n$ `Mean Temperature (°C)`         &lt;dbl&gt; 27.5, 27.7, 27.9, 29.2, 26.3, 26.4, 28…\n$ `Maximum Temperature (°C)`      &lt;dbl&gt; 31.1, 30.7, 32.7, 35.7, 30.4, 30.4, 32…\n$ `Minimum Temperature (°C)`      &lt;dbl&gt; 25.4, 25.9, 24.8, 26.0, 24.7, 24.2, 24…\n$ `Mean Wind Speed (km/h)`        &lt;dbl&gt; 22.0, 24.5, 20.2, 13.7, 9.7, 11.1, 8.2…\n$ `Max Wind Speed (km/h)`         &lt;dbl&gt; 56.5, 60.5, 51.1, 34.6, 41.5, 38.9, 34…\n$ Latitude                        &lt;dbl&gt; 1.4439, 1.4439, 1.4439, 1.4439, 1.4439…\n$ Longitude                       &lt;dbl&gt; 103.7854, 103.7854, 103.7854, 103.7854…"
   }
 ]

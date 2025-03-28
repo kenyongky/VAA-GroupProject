@@ -9,7 +9,7 @@ This document describes the data preparation process for combining and enriching
 
 ## 1. Download Historical Weather Data
 
-Download the daily weather data for each year from the [Meteorological Service Singapore](https://www.weather.gov.sg/climate-historical-daily/) website. Save all the CSV files into a single folder.
+Downloaded the daily weather data for each year from the [Meteorological Service Singapore](https://www.weather.gov.sg/climate-historical-daily/) website. Only [active full aws stations](https://www.weather.gov.sg/wp-content/uploads/2024/08/Station_Records.pdf) were considered. While we were downloading the datasets, Marina Barrage, Semakau Island and Tengah stations were observed to contain a significant amount of missing data (2 years worth of missing data). Therefore, these stations were omitted. The downloaded CSV files were placed into a single folder.
 
 ## 2. Combine All CSV Files into One Dataset
 
@@ -26,7 +26,7 @@ weather_data <- rbindlist(lapply(file_list, fread), fill = TRUE)
 
 ## 3. Convert Year, Month, Day to a Single Date Column
 
-Assuming each CSV file includes columns for `Year`, `Month`, and `Day`:
+Since each CSV file includes columns for `Year`, `Month`, and `Day`:
 
 ``` r
 # Combine year, month, and day into a proper date
@@ -42,7 +42,7 @@ We map the region using a predefined vector based on the station name.
 
 ``` r
 region_map <- c(
-  "Admiralty" = "North",
+  "Admiralty" = "North", 
   "Ang Mo Kio" = "Northeast",
   "Changi" = "East",
   "Choa Chu Kang (South)" = "West",
@@ -50,7 +50,6 @@ region_map <- c(
   "East Coast Parkway" = "East",
   "Jurong (West)" = "West",
   "Jurong Island" = "West",
-  "Marina Barrage" = "Central",
   "Newton" = "Central",
   "Pasir Panjang" = "Central",
   "Paya Lebar" = "Central",
@@ -59,7 +58,6 @@ region_map <- c(
   "Sembawang" = "North",
   "Sentosa Island" = "Central",
   "Tai Seng" = "Northeast",
-  "Tengah" = "West",
   "Tuas South" = "West"
 )
 
@@ -75,10 +73,10 @@ data_coords <- data.table(
   Station = c("Admiralty", "Ang Mo Kio", "Changi", "Choa Chu Kang (South)", "Clementi", "East Coast Parkway", 
               "Jurong (West)", "Jurong Island", "Marina Barrage", "Newton", "Pasir Panjang", "Paya Lebar", 
               "Pulau Ubin", "Seletar", "Sembawang", "Sentosa Island", "Tai Seng", "Tengah", "Tuas South"),
-  Latitude = c(1.4439, 1.3793, 1.3678, 1.3729, 1.3318, 1.3133, 1.3458, 1.2542, 1.2799, 1.3106, 1.2824, 
-               1.3571, 1.4168, 1.4167, 1.4250, 1.2503, 1.3406, 1.3858, 1.2938),
+  Latitude = c(1.4439, 1.3793, 1.3678, 1.3729, 1.3318, 1.3133, 1.3458, 1.2542, 1.2799, 1.2824, 
+               1.3571, 1.4168, 1.4167, 1.4250, 1.2503, 1.3406, 1.2938),
   Longitude = c(103.7854, 103.8500, 103.9823, 103.7224, 103.7762, 103.9620, 103.6817, 103.6741, 103.8703, 
-                103.8365, 103.7545, 103.9037, 103.9673, 103.8650, 103.8200, 103.8275, 103.8882, 103.7119, 
+                 103.7545, 103.9037, 103.9673, 103.8650, 103.8200, 103.8275, 103.8882, 
                 103.6184)
 )
 
@@ -99,7 +97,7 @@ setorder(weather_data, Station, Date)
 Convert data types such that 'Region' and 'Station' remain as character, 'Date' becomes a proper date type and all other columns become numeric.
 
 ``` r
-weather_data_clean <- weather_data %>%
+weather_data_updated <- weather_data %>%
   mutate(
     Date = dmy(Date),  # Convert Date column to Date format (from d/m/yyyy)
     across(
@@ -113,10 +111,10 @@ weather_data_clean <- weather_data %>%
 
 ``` r
 # Export as CSV
-write.csv(weather_data_clean, "weather_data_clean.csv", row.names = FALSE)
+write.csv(weather_data_updated, "weather_data_updated.csv", row.names = FALSE)
 
 # Export as RDS
-saveRDS(weather_data_clean, "weather_data_clean.rds")
+saveRDS(weather_data_updated, "weather_data_updated.rds")
 ```
 
 ## 9. Check for Duplicates and Missing Values
@@ -126,17 +124,17 @@ Ensure data integrity by checking for duplicates and missing values.
 ```{r}
 pacman::p_load(tidyverse, naniar, lubridate)
 
-weather_data_clean <-read_csv("data/weather_data_clean.csv")
+weather_data_updated <-read_csv("data/weather_data_updated.csv")
 
-duplicates <- weather_data_clean %>% 
+duplicates <- weather_data_updated %>% 
   filter(duplicated(.))
 
 print(duplicates)
-vis_miss(weather_data_clean)
+vis_miss(weather_data_updated)
 ```
 
 ## 10. A glimpse at the dataset
 
 ```{r}
-glimpse(weather_data_clean)
+glimpse(weather_data_updated)
 ```
