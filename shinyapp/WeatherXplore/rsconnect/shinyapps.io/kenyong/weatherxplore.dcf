@@ -1,0 +1,12 @@
+name: weatherxplore
+title: WeatherXplore
+username: kenyong
+account: kenyong
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 14372448
+bundleId: 10030451
+url: https://kenyong.shinyapps.io/weatherxplore/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
