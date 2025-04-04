@@ -41,7 +41,7 @@ ui <- navbarPage(
 
       
       .container-fluid {
-        background-color: white;
+        background-color: #fefeff;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 6px rgba(0, 0, 0, 0.04);
@@ -67,68 +67,32 @@ ui <- navbarPage(
              
              br(),
              
-             # Compact Left-Aligned Cards
              fluidRow(
                column(3,
-                      h4("🌡️ Hottest Day"),
                       div(
-                        style = "
-        background-color: #fff3cd;
-        border-left: 5px solid #ffa500;
-        padding: 12px;
-        font-size: 14px;
-        max-width: 300px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      ",
+                        style = "background-color: #fff3cd; border-left: 5px solid #ffa500; padding: 12px; font-size: 14px; margin: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);",
+                        h5(tags$strong("🌡️ Hottest Day"), style = "margin-top: 0;"),
                         textOutput("record_temp")
                       )
                ),
                column(3,
-                      h4("🧊 Coldest Day"),
                       div(
-                        style = "
-        background-color: #d1ecf1;
-        border-left: 5px solid #0c5460;
-        padding: 12px;
-        font-size: 14px;
-        max-width: 300px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      ",
+                        style = "background-color: #d1ecf1; border-left: 5px solid #0c5460; padding: 12px; font-size: 14px; margin: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);",
+                        h5(tags$strong("🧊 Coldest Day"), style = "margin-top: 0;"),
                         textOutput("record_cold")
                       )
-               )
-             ),
-             
-             fluidRow(
+               ),
                column(3,
-                      h4("🌧️ Wettest Month"),
                       div(
-                        style = "
-        background-color: #e2f0d9;
-        border-left: 5px solid #3c763d;
-        padding: 12px;
-        font-size: 14px;
-        max-width: 300px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      ",
+                        style = "background-color: #e2f0d9; border-left: 5px solid #3c763d; padding: 12px; font-size: 14px; margin: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);",
+                        h5(tags$strong("🌧️ Wettest Month"), style = "margin-top: 0;"),
                         textOutput("record_wet")
                       )
                ),
                column(3,
-                      h4("🌤️ Driest Month"),
                       div(
-                        style = "
-        background-color: #fbeee6;
-        border-left: 5px solid #e69138;
-        padding: 12px;
-        font-size: 14px;
-        max-width: 300px;
-        margin-bottom: 20px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      ",
+                        style = "background-color: #fbeee6; border-left: 5px solid #e69138; padding: 12px; font-size: 14px; margin: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);",
+                        h5(tags$strong("🌤️ Driest Month"), style = "margin-top: 0;"),
                         textOutput("record_dry")
                       )
                )
@@ -141,7 +105,7 @@ ui <- navbarPage(
              h4("Weather Station Map"),
              p("Explore the map below to see where Singapore's weather stations are located.",
                style = "font-size: 16px; max-width: 900px;"),
-             leafletOutput("station_map", width = "900px", height = "500px"),
+             leafletOutput("station_map", height = "500px"),
              
              br()
            )
