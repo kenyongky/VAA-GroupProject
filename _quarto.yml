@@ -5,6 +5,8 @@ website:
   navbar:
     title: "WeatherXplore"
     right:
+      - href: index.qmd
+        text: Home
       - href: overview.qmd
         text: Overview
       - href: "https://weatherxplore.shinyapps.io/weatherxplore/"

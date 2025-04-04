@@ -1,1 +1,19 @@
-![](images/weatherxplore-image.png){fig-align="center"}
+::: {style="text-align: center; margin-top: 2rem;"}
+<h1>WeatherXplore: Uncovering Singapore’s Weather Patterns Through Visual Analytics</h1>
+:::
+
+<br>
+
+WeatherXplore is an interactive Shiny web application designed to visualize and explore historical weather data from the Meteorological Service Singapore (MSS). Targeting researchers, policymakers, and the general public, our project aims to democratize access to weather insights and support climate-related decisions.
+
+WeatherXplore empowers users to:
+
+-   Analyze trends in temperature and rainfall (2020–2024)
+-   Identify regions and stations experiencing extreme events
+-   Compare different interpolation methods (IDW and Kriging)
+-   Forecast future temperature or rainfall using historical data.
+
+Whether you're assessing climate change impacts or simply planning ahead, WeatherXplore is your visual weather companion.
+
+🔗 [View Project Proposal](https://weatherxplore.netlify.app/proposal)\
+🔗 [Try the App](https://weatherxplore.shinyapps.io/weatherxplore/)
