@@ -1,0 +1,12 @@
+---
+title: "Meet the Team"
+format: html
+---
+
+We are **Group 15**, a dedicated trio of data explorers passionate about transforming raw data into actionable insights. Our project, **WeatherXplore**, is a web-enabled visual analytics application designed to help users investigate and interpret weather trends in Singapore.
+
+**Shanmugapriya Rajasekaran** – Exploratory & Confirmatory Analysis \| UI Design
+
+**Pwint Phoo Thaw** – Time Series Analysis & Forecasting \| Minutes of Meeting
+
+**Kenneth Yong** – Geospatial Analysis \| Github Lead

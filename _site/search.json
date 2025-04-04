@@ -16,9 +16,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "WeatherXplore",
+    "title": "\n🌤️ WeatherXplore\n",
     "section": "",
-    "text": "Welcome to WeatherXplore! An interactive analytics platform for smarter living."
+    "text": "🌤️ WeatherXplore\n\n\nUncovering Singapore’s Weather Patterns Through Visual Analytics"
   },
   {
     "objectID": "proposal.html#overview",
@@ -201,5 +201,26 @@
     "title": "Data Preparation",
     "section": "12. Export prepared datasets as CSV and RDS",
     "text": "12. Export prepared datasets as CSV and RDS\n\n# Export as CSV\nwrite.csv(weather_data_cleaned, \"weather_data_cleaned.csv\", row.names = FALSE)\n\n# Export as RDS\nsaveRDS(weather_data_cleaned, \"weather_data_cleaned.rds\")"
+  },
+  {
+    "objectID": "index.html#project-overview",
+    "href": "index.html#project-overview",
+    "title": "\n🌤️ WeatherXplore\n",
+    "section": "🚀 Project Overview",
+    "text": "🚀 Project Overview\nWeatherXplore is an interactive Shiny application designed to help users explore and analyze historical weather data from the Meteorological Service Singapore (MSS) from 2020 to 2024.\nOur project aims to: - Democratize access to weather data and climate insights. - Support policy makers, researchers, and citizens in understanding local climate trends. - Provide interactive visualizations, spatial analysis, and forecasting tools.\n\n🔍 Key Features\n\n📍 Spatial Interpolation: Compare IDW and Kriging techniques to visualize rainfall and temperature patterns.\n📈 Extreme Weather Detection: Spot temperature and rainfall extremes across stations and regions.\n🗓️ Time Series Forecasting: Forecast future weather trends based on historical patterns.\n🌐 Geofacet Views: Explore rainfall and temperature by station using geofacetted time series plots."
+  },
+  {
+    "objectID": "index.html#quick-links",
+    "href": "index.html#quick-links",
+    "title": "\n🌤️ WeatherXplore\n",
+    "section": "📁 Quick Links",
+    "text": "📁 Quick Links\n\n▶️ Launch the App\n📘 Project Proposal\n📄 User Guide\n🖼️ Poster (JPEG)\n📂 GitHub Repository"
+  },
+  {
+    "objectID": "team.html",
+    "href": "team.html",
+    "title": "Meet the Team",
+    "section": "",
+    "text": "We are Group 15, a dedicated trio of data explorers passionate about transforming raw data into actionable insights. Our project, WeatherXplore, is a web-enabled visual analytics application designed to help users investigate and interpret weather trends in Singapore.\nShanmugapriya Rajasekaran – Exploratory & Confirmatory Analysis | UI Design\nPwint Phoo Thaw – Time Series Analysis & Forecasting | Minutes of Meeting\nKenneth Yong – Geospatial Analysis | Github Lead"
   }
 ]

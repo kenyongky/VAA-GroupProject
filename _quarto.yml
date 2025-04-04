@@ -2,11 +2,13 @@ project:
   type: website
 
 website:
-  title: "WeatherXplore"
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
+    title: "WeatherXplore"
+    right:
+      - href: overview.qmd
+        text: Overview
+      - href: "https://weatherxplore.shinyapps.io/weatherxplore/"
+        text: Shiny App
       - text: "Project Proposal"
         menu:
         - href: proposal_old.qmd
@@ -17,9 +19,14 @@ website:
         menu:
         - href: data_prep.qmd
           text: Data Preparation
+        - href: "https://isss608-priya.netlify.app/take-home_ex/take-home_ex03/take-home_ex03"
+          text: Exploratory & Confirmatory Analytics
+        - href: "https://isss608-ppthaw.netlify.app/take-home_ex/take-home_ex3/take-home_ex3"
+          text: Time-series Analytics
         - href: "https://isss608-kenyongky.netlify.app/take-home_ex/take-home_ex03/take-home_ex03"
           text: Geospatial Analytics
-      - about.qmd
+      - href: team.qmd
+        text: Our Team
     
 
 format:

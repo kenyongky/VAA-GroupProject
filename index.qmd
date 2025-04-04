@@ -1,7 +1,1 @@
----
-title: "WeatherXplore"
----
-
-**Welcome to WeatherXplore! An interactive analytics platform for smarter living.**
-
-![](images/weather-forecasting-multi-color-concept-icon-analysis-of-atmospheric-data-and-models-application-of-meteorology-round-shape-line-illustration-abstract-idea-graphic-design-easy-to-use-in-article-vector-01.jpg)
+![](images/weatherxplore-image.png){fig-align="center"}
