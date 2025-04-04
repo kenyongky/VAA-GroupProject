@@ -7,17 +7,15 @@ website:
     right:
       - href: index.qmd
         text: Home
-      - href: overview.qmd
-        text: Overview
-      - href: "https://weatherxplore.shinyapps.io/weatherxplore/"
-        text: Shiny App
+      - href: team.qmd
+        text: Team
       - text: "Project Proposal"
         menu:
         - href: proposal_old.qmd
           text: Proposal (old)
         - href: proposal.qmd
           text: Proposal (revised)
-      - text: "Prototype"
+      - text: "Modules"
         menu:
         - href: data_prep.qmd
           text: Data Preparation
@@ -27,8 +25,11 @@ website:
           text: Time-series Analytics
         - href: "https://isss608-kenyongky.netlify.app/take-home_ex/take-home_ex03/take-home_ex03"
           text: Geospatial Analytics
-      - href: team.qmd
-        text: Our Team
+      - href: "https://weatherxplore.shinyapps.io/weatherxplore/"
+        text: Shiny App
+      - href: poster.qmd
+        text: Poster
+      
     
 
 format:
