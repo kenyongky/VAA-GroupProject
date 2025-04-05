@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Revised Project Proposal: WeatherXplore – WeatherXplore</title>
+<title>index_old – WeatherXplore</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -87,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
@@ -100,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-project-proposal" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Project Proposal</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-project-proposal">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-project-proposal">    
         <li>
     <a class="dropdown-item" href="./proposal_old.html">
  <span class="dropdown-text">Proposal (old)</span></a>
@@ -115,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-modules" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Modules</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-modules">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-modules">    
         <li>
     <a class="dropdown-item" href="./data_prep.html">
  <span class="dropdown-text">Data Preparation</span></a>
@@ -138,7 +138,7 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-shiny" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Shiny</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-shiny">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-shiny">    
         <li>
     <a class="dropdown-item" href="https://smu.sharepoint.com/:b:/t/VisualAnalytics639/EcfNCHmQxehKtGMHlZzio_EBtovdXJd3yWqcGaSa5aVNTA?e=wj1PZ2">
  <span class="dropdown-text">User Guide</span></a>
@@ -164,192 +164,34 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><strong>1. Overview</strong></a></li>
-  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation"><strong>2. Motivation</strong></a></li>
-  <li><a href="#the-problems-addressed" id="toc-the-problems-addressed" class="nav-link" data-scroll-target="#the-problems-addressed"><strong>3. The Problems Addressed</strong></a></li>
-  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources"><strong>4. Data Sources</strong></a></li>
-  <li><a href="#approach-and-methodology" id="toc-approach-and-methodology" class="nav-link" data-scroll-target="#approach-and-methodology"><strong>5. Approach and Methodology</strong></a>
-  <ul class="collapse">
-  <li><a href="#exploratory-confirmatory-data-analysis-priya" id="toc-exploratory-confirmatory-data-analysis-priya" class="nav-link" data-scroll-target="#exploratory-confirmatory-data-analysis-priya"><strong>5.1 Exploratory &amp; Confirmatory Data Analysis (Priya)</strong></a></li>
-  <li><a href="#time-series-analysis-forecasting-phoo" id="toc-time-series-analysis-forecasting-phoo" class="nav-link" data-scroll-target="#time-series-analysis-forecasting-phoo"><strong>5.2 Time Series Analysis &amp; Forecasting (Phoo)</strong></a></li>
-  <li><a href="#geospatial-analysis-kenneth" id="toc-geospatial-analysis-kenneth" class="nav-link" data-scroll-target="#geospatial-analysis-kenneth"><strong>5.3 Geospatial Analysis (Kenneth)</strong></a></li>
-  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation"><strong>5.4 Data Preparation</strong></a></li>
-  </ul></li>
-  <li><a href="#implementation-timeline" id="toc-implementation-timeline" class="nav-link" data-scroll-target="#implementation-timeline"><strong>6. Implementation Timeline</strong></a></li>
-  <li><a href="#expected-outcome" id="toc-expected-outcome" class="nav-link" data-scroll-target="#expected-outcome"><strong>7. Expected Outcome</strong></a></li>
-  <li><a href="#tools-technologies" id="toc-tools-technologies" class="nav-link" data-scroll-target="#tools-technologies"><strong>8. Tools &amp; Technologies</strong></a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Revised Project Proposal: WeatherXplore</h1>
+
+
+
+<div style="text-align: center; margin-top: 2rem;">
+<h1>
+WeatherXplore: Uncovering Singapore’s Weather Patterns Through Visual Analytics
+</h1>
 </div>
+<p><br></p>
+<p>WeatherXplore is an interactive Shiny web application designed to visualize and explore historical weather data from the Meteorological Service Singapore (MSS). Targeting researchers, policymakers, and the general public, our project aims to democratize access to weather insights and support climate-related decisions.</p>
+<p>WeatherXplore empowers users to:</p>
+<ul>
+<li>Analyze trends in temperature and rainfall (2020–2024)</li>
+<li>Identify regions and stations experiencing extreme events</li>
+<li>Compare different interpolation methods (IDW and Kriging)</li>
+<li>Forecast future temperature or rainfall using historical data.</li>
+</ul>
+<p>Whether you’re assessing climate change impacts or simply planning ahead, WeatherXplore is your visual weather companion.</p>
+<p>🔗 <a href="https://weatherxplore.netlify.app/proposal">View Project Proposal</a><br>
+🔗 <a href="https://weatherxplore.shinyapps.io/weatherxplore/">Try the App</a></p>
 
 
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview"><strong>1. Overview</strong></h2>
-<p>This project aims to develop an interactive visual analytics tool for Singapore’s climate data. While historical weather data is publicly available, existing platforms lack comprehensive visualizations, advanced forecasting capabilities, and spatial interpolation techniques. Our solution will integrate various R packages to provide in-depth climate analytics.</p>
-</section>
-<section id="motivation" class="level2">
-<h2 class="anchored" data-anchor-id="motivation"><strong>2. Motivation</strong></h2>
-<p>Singapore’s National Environment Agency provides access to historical weather data, but the available tools lack interactivity, comparative analysis, and advanced statistical modeling. This project addresses these gaps by:</p>
-<ul>
-<li><p>Providing interactive and comparative visualizations of weather trends.</p></li>
-<li><p>Conducting advanced time-series forecasting for rainfall and temperature.</p></li>
-<li><p>Utilizing geospatial interpolation techniques to estimate weather conditions at unmonitored locations.</p></li>
-</ul>
-</section>
-<section id="the-problems-addressed" class="level2">
-<h2 class="anchored" data-anchor-id="the-problems-addressed"><strong>3. The Problems Addressed</strong></h2>
-<ul>
-<li><p>Current government tools are static and offer limited interactivity.</p></li>
-<li><p>No existing system provides an integrated platform for time-series analysis and forecasting.</p></li>
-<li><p>Spatial interpolation is missing, restricting accurate weather estimations beyond monitored stations.</p></li>
-</ul>
-</section>
-<section id="data-sources" class="level2">
-<h2 class="anchored" data-anchor-id="data-sources"><strong>4. Data Sources</strong></h2>
-<ul>
-<li><p><strong>Climate Historical Daily Records (Weather.gov.sg)</strong></p>
-<p>The Meteorological Service Singapore provides a publicly accessible repository of historical daily weather data. The dataset includes:</p>
-<ul>
-<li><p><strong>Temperature and Rainfall Data</strong>: Recorded at 19 weather stations across Singapore.</p></li>
-<li><p><strong>Time Span</strong>: 5 years (2020-2024), providing a rich dataset to analyze weather trends and variations.</p></li>
-<li><p><strong>Data Frequency</strong>: Daily records capturing temperature highs/lows and total rainfall.</p></li>
-<li><p><strong>Spatial Coverage</strong>: Covers multiple monitoring stations, offering regional weather insights.</p></li>
-<li><p><strong>Missing Data Handling</strong>: Any gaps in the dataset are addressed through imputation techniques such as simple moving averages.</p></li>
-<li><p><strong>Data Format</strong>: The dataset is available in structured tabular formats, making it suitable for integration with R-based analytical tools.</p></li>
-<li><p><strong>Source</strong>: Data retrieved from <a href="https://www.weather.gov.sg/climate-historical-daily/">Weather.gov.sg</a>, ensuring credibility and consistency with Singapore’s official climate records.</p></li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Dataset</th>
-<th>Frequency</th>
-<th>Period</th>
-<th>Source</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Climate Historical Daily Records (rainfall, temperature)</td>
-<td>Daily</td>
-<td>2020-2024</td>
-<td><a href="https://www.weather.gov.sg/climate-historical-daily/" class="uri">https://www.weather.gov.sg/climate-historical-daily/</a></td>
-</tr>
-</tbody>
-</table></li>
-</ul>
-</section>
-<section id="approach-and-methodology" class="level2">
-<h2 class="anchored" data-anchor-id="approach-and-methodology"><strong>5. Approach and Methodology</strong></h2>
-<p>The tool will be developed in <strong>R Shiny</strong>, divided into three core modules:</p>
-<section id="exploratory-confirmatory-data-analysis-priya" class="level3">
-<h3 class="anchored" data-anchor-id="exploratory-confirmatory-data-analysis-priya"><strong>5.1 Exploratory &amp; Confirmatory Data Analysis (Priya)</strong></h3>
-<ul>
-<li><p>Analyzing temperature and rainfall variations over five years.</p></li>
-<li><p>Ridge plots to visualize station-wise trends over time.</p></li>
-<li><p>Calendar heatmaps to capture daily temperature changes.</p></li>
-<li><p>Comparative statistical tests to validate observed patterns.</p></li>
-</ul>
-</section>
-<section id="time-series-analysis-forecasting-phoo" class="level3">
-<h3 class="anchored" data-anchor-id="time-series-analysis-forecasting-phoo"><strong>5.2 Time Series Analysis &amp; Forecasting (Phoo)</strong></h3>
-<ul>
-<li><p>Decomposition of time-series data into <strong>trend, seasonal, and white noise</strong> components.</p></li>
-<li><p>Implementation of <strong>ARIMA and exponential smoothing</strong> models for forecasting.</p></li>
-<li><p>Model validation and performance comparison.</p></li>
-</ul>
-</section>
-<section id="geospatial-analysis-kenneth" class="level3">
-<h3 class="anchored" data-anchor-id="geospatial-analysis-kenneth"><strong>5.3 Geospatial Analysis (Kenneth)</strong></h3>
-<ul>
-<li><p><strong>Geofacet visualizations</strong> to compare weather variations across different locations.</p></li>
-<li><p><strong>Spatial interpolation</strong> to estimate rainfall and temperature beyond monitored stations.</p></li>
-<li><p>Using Singapore’s official climate datasets for interpolation techniques.</p></li>
-</ul>
-</section>
-<section id="data-preparation" class="level3">
-<h3 class="anchored" data-anchor-id="data-preparation"><strong>5.4 Data Preparation</strong></h3>
-<ul>
-<li><p>Consolidation of multiple datasets into a structured format.</p></li>
-<li><p>Handling missing values and standardizing variable names.</p></li>
-<li><p>Code implementation to combine and clean datasets efficiently.</p></li>
-</ul>
-</section>
-</section>
-<section id="implementation-timeline" class="level2">
-<h2 class="anchored" data-anchor-id="implementation-timeline"><strong>6. Implementation Timeline</strong></h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Task</th>
-<th>Deadline</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Proposal Revision</td>
-<td>March 20, 2025</td>
-</tr>
-<tr class="even">
-<td>Prototype Completion</td>
-<td>March 22, 2025 (4 PM)</td>
-</tr>
-<tr class="odd">
-<td>Shiny App Development</td>
-<td>March 29, 2025 (4-6 PM)</td>
-</tr>
-<tr class="even">
-<td>User Guide Preparation</td>
-<td>March 30, 2025</td>
-</tr>
-<tr class="odd">
-<td>Poster Preparation</td>
-<td>March 30, 2025</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="expected-outcome" class="level2">
-<h2 class="anchored" data-anchor-id="expected-outcome"><strong>7. Expected Outcome</strong></h2>
-<ul>
-<li><p>A <strong>web-based visual analytics tool</strong> allowing users to explore historical and predictive weather trends interactively.</p></li>
-<li><p>Advanced <strong>time-series forecasting</strong> with seasonal adjustments.</p></li>
-<li><p><strong>Geospatial interpolation</strong> to estimate climate parameters at unmonitored locations.</p></li>
-<li><p>An <strong>interactive dashboard</strong> enabling policymakers, researchers, and the general public to derive meaningful insights.</p></li>
-</ul>
-</section>
-<section id="tools-technologies" class="level2">
-<h2 class="anchored" data-anchor-id="tools-technologies"><strong>8. Tools &amp; Technologies</strong></h2>
-<ul>
-<li><strong>R Packages:</strong> <code>tidyverse</code>, <code>dplyr</code>, <code>lubridate</code>, <code>tidygraph</code>, <code>ggraph</code>, <code>visNetwork</code>, <code>ggplot2</code>, <code>shiny</code>, <code>leaflet</code>, <code>sf</code>.</li>
-</ul>
-
-
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

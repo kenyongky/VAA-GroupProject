@@ -2,8 +2,8 @@ project:
   type: website
 
 website:
+  title: "WeatherXplore"
   navbar:
-    title: "WeatherXplore"
     right:
       - href: index.qmd
         text: Home
@@ -11,26 +11,28 @@ website:
         text: Team
       - text: "Project Proposal"
         menu:
-        - href: proposal_old.qmd
-          text: Proposal (old)
-        - href: proposal.qmd
-          text: Proposal (revised)
+          - href: proposal_old.qmd
+            text: Proposal (old)
+          - href: proposal.qmd
+            text: Proposal (revised)
       - text: "Modules"
         menu:
-        - href: data_prep.qmd
-          text: Data Preparation
-        - href: "https://isss608-priya.netlify.app/take-home_ex/take-home_ex03/take-home_ex03"
-          text: Exploratory & Confirmatory Analytics
-        - href: "https://isss608-ppthaw.netlify.app/take-home_ex/take-home_ex3/take-home_ex3"
-          text: Time-series Analytics
-        - href: "https://isss608-kenyongky.netlify.app/take-home_ex/take-home_ex03/take-home_ex03"
-          text: Geospatial Analytics
-      - href: "https://weatherxplore.shinyapps.io/weatherxplore/"
-        text: Shiny App
+          - href: data_prep.qmd
+            text: Data Preparation
+          - href: "https://isss608-priya.netlify.app/take-home_ex/take-home_ex03/take-home_ex03"
+            text: Exploratory & Confirmatory Analytics
+          - href: "https://isss608-ppthaw.netlify.app/take-home_ex/take-home_ex3/take-home_ex3"
+            text: Time-series Analytics
+          - href: "https://isss608-kenyongky.netlify.app/take-home_ex/take-home_ex03/take-home_ex03"
+            text: Geospatial Analytics
+      - text: "Shiny"
+        menu:
+          - href: "https://smu.sharepoint.com/:b:/t/VisualAnalytics639/EcfNCHmQxehKtGMHlZzio_EBtovdXJd3yWqcGaSa5aVNTA?e=wj1PZ2"
+            text: User Guide
+          - href: "https://weatherxplore.shinyapps.io/weatherxplore/"
+            text: ShinyApp
       - href: poster.qmd
         text: Poster
-      
-    
 
 format:
   html:
@@ -39,4 +41,3 @@ format:
     toc: true
 
 editor: visual
-
