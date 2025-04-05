@@ -1,62 +1,66 @@
 library(shiny)
 library(leaflet)
+library(dplyr)
+library(lubridate)
 
-# Source your module UI/server
 source("eda.R")
 source("tsa.R")
 source("geofacet.R")
 source("interpolation.R")
 
 ui <- navbarPage(
-  title = div("🌦️ WeatherXplore", style = "display: inline;"),
-  
+  title = div(" ", style = "font-weight: bold; color: #1d3557;"),
   header = tags$head(
     tags$style(HTML("
-      /* Pastel-themed navbar */
+      /* Font and Navbar Styling */
+      body {
+        background-color: #dff1f9 !important;
+        font-family: 'Inter', sans-serif;
+        font-size: 15px;
+        color: #1d3557;
+        margin: 0;
+        padding: 0;
+      }
       .navbar {
-        background-color: #f6f8fa !important;  /* light pastel gray-blue */
+        background-color: #dff1f9 !important;
         border-bottom: 2px solid #cce5ff;
       }
       .navbar .navbar-brand,
       .navbar-nav > li > a {
-        color: #336699 !important;  /* muted pastel blue text */
+        color: #1d3557 !important;
         font-weight: 500;
+        font-size: 15px;
       }
       .navbar .navbar-brand:hover,
       .navbar-nav > li > a:hover {
-        color: #6699cc !important;  /* lighter blue on hover */
+        color: #0077b6 !important;
       }
       .navbar-nav > .active > a,
       .navbar-nav > .active > a:hover,
-      .navbar-nav > .active > a:focus,
-      .navbar-nav .dropdown-menu > .active > a {
-        background-color: #ddeeff !important;
+      .navbar-nav > .active > a:focus {
+        background-color: #bde0fe !important;
         color: #003366 !important;
       }
-
-      /* Light pastel background */
-      body {
-        background-color: #fefeff !important;
-      }
-
-      
       .container-fluid {
-        background-color: #fefeff;
+        background-color: transparent !important;
         padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.04);
+      }
+      h2, h4, h5 {
+        color: #1d3557;
+        font-weight: 600;
+      }
+      p, li {
+        font-size: 15px;
       }
     "))
   ),
   
-  tabPanel("Home",
+  tabPanel("🌦️WeatherXplore",
            fluidPage(
              h2("Welcome to WeatherXplore!", style = "margin-top: 20px;"),
              p("WeatherXplore is a visual analytics tool that helps you explore, analyze, and interpret historical weather data across Singapore. Use this app to uncover spatial and temporal trends in rainfall and temperature, and gain insights using interactive charts and maps.",
-               style = "font-size: 16px; max-width: 900px;"),
-             
+               style = "max-width: 900px;"),
              br(),
-             
              h4("What you can do"),
              tags$ul(
                tags$li(strong("Exploratory Data Analysis:"), " Compare rainfall and temperature across months, years, and stations."),
@@ -64,53 +68,37 @@ ui <- navbarPage(
                tags$li(strong("Time Series Analysis:"), " Understand weather patterns over time and make predictions."),
                tags$li(strong("Geospatial Analysis:"), " Visualize spatial distribution using geofacet plots and interpolation maps.")
              ),
-             
              br(),
-             
              fluidRow(
                column(3,
-                      div(
-                        style = "background-color: #fff3cd; border-left: 5px solid #ffa500; padding: 12px; font-size: 14px; margin: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);",
-                        h5(tags$strong("🌡️ Hottest Day"), style = "margin-top: 0;"),
-                        textOutput("record_temp")
-                      )
+                      div(style = "background-color: #fff3cd; border-left: 5px solid #ffa500; padding: 12px; margin: 5px;",
+                          h5("🌡️ Hottest Day"),
+                          textOutput("record_temp"))
                ),
                column(3,
-                      div(
-                        style = "background-color: #d1ecf1; border-left: 5px solid #0c5460; padding: 12px; font-size: 14px; margin: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);",
-                        h5(tags$strong("🧊 Coldest Day"), style = "margin-top: 0;"),
-                        textOutput("record_cold")
-                      )
+                      div(style = "background-color: #d1ecf1; border-left: 5px solid #0c5460; padding: 12px; margin: 5px;",
+                          h5("🧊 Coldest Day"),
+                          textOutput("record_cold"))
                ),
                column(3,
-                      div(
-                        style = "background-color: #e2f0d9; border-left: 5px solid #3c763d; padding: 12px; font-size: 14px; margin: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);",
-                        h5(tags$strong("🌧️ Wettest Month"), style = "margin-top: 0;"),
-                        textOutput("record_wet")
-                      )
+                      div(style = "background-color: #e2f0d9; border-left: 5px solid #3c763d; padding: 12px; margin: 5px;",
+                          h5("🌧️ Wettest Month"),
+                          textOutput("record_wet"))
                ),
                column(3,
-                      div(
-                        style = "background-color: #fbeee6; border-left: 5px solid #e69138; padding: 12px; font-size: 14px; margin: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);",
-                        h5(tags$strong("🌤️ Driest Month"), style = "margin-top: 0;"),
-                        textOutput("record_dry")
-                      )
+                      div(style = "background-color: #fbeee6; border-left: 5px solid #e69138; padding: 12px; margin: 5px;",
+                          h5("🌤️ Driest Month"),
+                          textOutput("record_dry"))
                )
              ),
-             
-             br(),
-             
-             br(),
-             
+             br(), br(),
              h4("Weather Station Map"),
              p("Explore the map below to see where Singapore's weather stations are located.",
-               style = "font-size: 16px; max-width: 900px;"),
+               style = "max-width: 900px;"),
              leafletOutput("station_map", height = "500px"),
-             
              br()
            )
   ),
-  
   tabPanel("Exploratory & Confirmatory Data Analysis", edaUI("eda")),
   tabPanel("Time Series Analysis", tsaUI("tsa")),
   navbarMenu("Geospatial Analysis",
@@ -144,28 +132,23 @@ server <- function(input, output, session) {
       ) %>%
       setView(lng = 103.8198, lat = 1.35, zoom = 11)
   })
+  
   output$record_temp <- renderText({
     record <- weather_data %>%
       filter(!is.na(`Maximum Temperature (°C)`)) %>%
       arrange(desc(`Maximum Temperature (°C)`), desc(Date)) %>%
-      slice(1)  # latest among ties
-    
-    temp <- record$`Maximum Temperature (°C)`
-    station <- record$Station
-    date <- format(record$Date, "%d %b %Y")
-    
-    paste0(temp, " °C at ", station, " on ", date)
+      slice(1)
+    paste0(record$`Maximum Temperature (°C)`, " °C at ", record$Station, " on ", format(record$Date, "%d %b %Y"))
   })
+  
   output$record_cold <- renderText({
     record <- weather_data %>%
       filter(!is.na(`Minimum Temperature (°C)`)) %>%
       arrange(`Minimum Temperature (°C)`, desc(Date)) %>%
       slice(1)
-    
     paste0(record$`Minimum Temperature (°C)`, " °C at ", record$Station, " on ", format(record$Date, "%d %b %Y"))
   })
   
-  # Wettest Month
   output$record_wet <- renderText({
     monthly_rain <- weather_data %>%
       mutate(YearMonth = floor_date(Date, "month")) %>%
@@ -173,11 +156,9 @@ server <- function(input, output, session) {
       summarise(TotalRain = sum(`Daily Rainfall Total (mm)`, na.rm = TRUE), .groups = "drop") %>%
       arrange(desc(TotalRain)) %>%
       slice(1)
-    
     paste0(round(monthly_rain$TotalRain, 1), " mm in ", format(monthly_rain$YearMonth, "%b %Y"))
   })
   
-  # Driest Month
   output$record_dry <- renderText({
     monthly_rain <- weather_data %>%
       mutate(YearMonth = floor_date(Date, "month")) %>%
@@ -185,10 +166,8 @@ server <- function(input, output, session) {
       summarise(TotalRain = sum(`Daily Rainfall Total (mm)`, na.rm = TRUE), .groups = "drop") %>%
       arrange(TotalRain) %>%
       slice(1)
-    
     paste0(round(monthly_rain$TotalRain, 1), " mm in ", format(monthly_rain$YearMonth, "%b %Y"))
   })
-  
 }
 
 shinyApp(ui, server)

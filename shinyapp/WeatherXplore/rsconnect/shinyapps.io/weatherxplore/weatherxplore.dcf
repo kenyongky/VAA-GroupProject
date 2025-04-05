@@ -1,11 +1,11 @@
 name: weatherxplore
-title: weatherxplore
+title: WeatherXplore
 username: weatherxplore
 account: weatherxplore
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 14392243
-bundleId: 10036763
+bundleId: 10059458
 url: https://weatherxplore.shinyapps.io/weatherxplore/
 version: 1
 asMultiple: FALSE
