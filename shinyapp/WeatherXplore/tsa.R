@@ -26,7 +26,7 @@ variables_select <- c(
 tsaUI <- function(id) {
   ns <- NS(id)
   
-  navbarPage("Singapore Weather App",
+  navbarPage("Time Series Analysis",
              
              # Tab 1: Time Series Visualization
              tabPanel("Time Series Visualization",

@@ -68,6 +68,7 @@ ui <- navbarPage(
                tags$li(strong("Time Series Analysis:"), " Understand weather patterns over time and make predictions."),
                tags$li(strong("Geospatial Analysis:"), " Visualize spatial distribution using geofacet plots and interpolation maps.")
              ),
+             "View the user guide", tags$a(href = "https://smu.sharepoint.com/:b:/r/teams/VisualAnalytics639/Shared%20Documents/General/WeatherXplore_User_Guide.pdf?csf=1&web=1&e=E5AZ3g", "here", target = "_blank"),
              br(),
              fluidRow(
                column(3,
